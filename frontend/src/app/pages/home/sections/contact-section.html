@@ -34,7 +34,7 @@
             </div>
             <div class="field">
               <label for="message">message</label>
-              <textarea id="message" rows="6" formControlName="message"></textarea>
+              <textarea id="message" rows="5" formControlName="message"></textarea>
               @if (form.controls.message.touched && form.controls.message.invalid) {
                 <p class="error" role="alert">un message d'au moins 10 caractères est requis.</p>
               }
