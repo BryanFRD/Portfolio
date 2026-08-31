@@ -134,12 +134,15 @@
     &::before {
       content: '';
       position: absolute;
-      inset: -5px;
+      top: -1px;
+      bottom: -1px;
+      left: -9px;
+      right: -9px;
       background-image:
         linear-gradient(var(--border) 1px, transparent 1px),
         linear-gradient(90deg, var(--border) 1px, transparent 1px);
       background-size: 20px 20px;
-      background-position: 5px 5px;
+      background-position: center;
     }
 
     img {
