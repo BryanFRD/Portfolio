@@ -18,11 +18,20 @@ export class StackSection {
     { year: '2016', title: 'Mods Minecraft', tags: ['Java', 'Forge'] },
     { year: '2022', title: 'Développement web', tags: ['JavaScript', 'PHP', 'React'] },
     { year: '2023', title: 'Entrée à Epitech', tags: ['React', 'Java', 'TypeScript'] },
-    { year: '2024', title: 'Alternance chez Worldline', tags: ['Full-stack', 'MeTS'] },
+    {
+      year: '2024',
+      title: 'Alternance chez Worldline',
+      tags: ['Full-stack', 'MeTS', 'Secteur public'],
+    },
     {
       year: '2026',
       title: 'Création de FerrLabs : FerrFlow, LFSX, IdleWarden',
       tags: ['Rust', 'Kubernetes', 'Angular'],
+    },
+    {
+      year: '2026',
+      title: 'Alternance chez Magellan, rachat de la branche MeTS',
+      tags: ['Full-stack', 'MeTS'],
     },
   ];
 }

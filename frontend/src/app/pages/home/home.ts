@@ -30,7 +30,7 @@ export class Home {
     this.seo.setPage({
       title: 'Accueil',
       description:
-        'Bryan Ferrando, développeur full-stack : alternant chez Worldline, étudiant à Epitech et créateur de FerrLabs. Projets, stack et contact.',
+        'Bryan Ferrando, développeur full-stack : alternant chez Magellan, étudiant à Epitech et créateur de FerrLabs. Projets, stack et contact.',
       path: '/',
       type: 'profile',
     });
@@ -40,7 +40,7 @@ export class Home {
       name: SITE_NAME,
       url: SITE_URL,
       jobTitle: 'Développeur full-stack',
-      worksFor: { '@type': 'Organization', name: 'Worldline' },
+      worksFor: { '@type': 'Organization', name: 'Magellan Partners' },
       alumniOf: { '@type': 'EducationalOrganization', name: 'Epitech' },
       sameAs: [GITHUB_URL, LINKEDIN_URL],
     });

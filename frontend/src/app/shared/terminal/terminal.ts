@@ -51,7 +51,7 @@ export class Terminal {
         );
         break;
       case 'whoami':
-        this.print('Bryan Ferrando : développeur full-stack (Worldline, Epitech, FerrLabs).');
+        this.print('Bryan Ferrando : développeur full-stack (Magellan, Epitech, FerrLabs).');
         break;
       case 'projects':
         this.close();

@@ -33,7 +33,7 @@ export class ContactSection {
   ];
 
   protected readonly statusRows = [
-    { label: 'actuellement', value: 'alternant @ Worldline', highlight: false },
+    { label: 'actuellement', value: 'alternant @ Magellan', highlight: false },
     { label: 'études', value: 'Epitech, MSc', highlight: false },
     { label: 'localisation', value: 'Hauts-de-France / remote', highlight: false },
     { label: 'ouvert aux', value: 'opportunités & projets', highlight: true },
