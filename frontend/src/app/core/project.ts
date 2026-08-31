@@ -1,10 +1,12 @@
+import { Localized } from './i18n';
+
 export interface Project {
   slug: string;
   name: string;
-  category: string;
-  status: string;
+  category: Localized;
+  status: Localized;
   year: number;
-  description: string;
+  description: Localized;
   technologies: string[];
   featured: boolean;
   repositoryUrl?: string;

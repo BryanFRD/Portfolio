@@ -1,8 +1,19 @@
-import { afterNextRender, Component, output, signal } from '@angular/core';
+import { afterNextRender, Component, inject, output, signal } from '@angular/core';
+import { LocaleService } from '../../../core/i18n';
 import { Parallax } from '../../../shared/parallax';
 
 const NAME = 'Bryan Ferrando';
-const ROLE = 'Développeur Full-Stack & créateur de FerrLabs';
+
+const TEXT = {
+  role: {
+    fr: 'Développeur Full-Stack & créateur de FerrLabs',
+    en: 'Full-Stack Developer & creator of FerrLabs',
+  },
+  kicker: { fr: '[init] - bonjour, je suis', en: '[init] - hi, i am' },
+  available: { fr: 'disponible', en: 'available' },
+  seeProjects: { fr: 'voir les projets →', en: 'see the projects →' },
+  contactMe: { fr: 'me contacter', en: 'contact me' },
+};
 
 type TypingPhase = 'idle' | 'name' | 'role' | 'done';
 
@@ -15,8 +26,13 @@ type TypingPhase = 'idle' | 'name' | 'role' | 'done';
 export class HeroSection {
   readonly navigate = output<string>();
 
+  protected readonly t = inject(LocaleService).t;
+  protected readonly text = TEXT;
+  protected readonly name = NAME;
+  protected readonly role = this.t(TEXT.role);
+
   protected readonly line1 = signal(NAME);
-  protected readonly line2 = signal(ROLE);
+  protected readonly line2 = signal(this.role);
   protected readonly phase = signal<TypingPhase>('done');
   protected readonly currentYear = new Date().getFullYear();
 
@@ -50,8 +66,8 @@ export class HeroSection {
     let i = 0;
     const interval = setInterval(() => {
       i++;
-      this.line2.set(ROLE.slice(0, i));
-      if (i >= ROLE.length) {
+      this.line2.set(this.role.slice(0, i));
+      if (i >= this.role.length) {
         clearInterval(interval);
         this.phase.set('done');
       }

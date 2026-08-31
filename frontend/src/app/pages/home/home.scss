@@ -19,12 +19,42 @@
     text-transform: uppercase;
   }
 
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
   ul {
     display: flex;
     gap: 2rem;
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  .navbar-lang {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+
+    a {
+      text-decoration: none;
+      color: var(--muted-foreground);
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: var(--foreground);
+      }
+
+      &.active {
+        color: var(--primary);
+      }
+    }
   }
 
   button {

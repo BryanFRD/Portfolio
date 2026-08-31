@@ -1,51 +1,44 @@
 <section id="contact" class="section">
   <div class="container">
     <div class="section-head">
-      <p class="label">[04] - contact</p>
-      <h2 class="section-title">Travaillons ensemble</h2>
+      <p class="label">{{ t(text.label) }}</p>
+      <h2 class="section-title">{{ t(text.title) }}</h2>
     </div>
 
     <div class="contact-grid">
       <div>
-        <p class="intro">
-          Ouvert aux opportunités, aux collaborations techniques et aux projets intéressants.
-          N'hésitez pas à m'écrire, réponse rapide garantie.
-        </p>
+        <p class="intro">{{ t(text.intro) }}</p>
 
         @if (state() === 'sent') {
-          <p class="feedback success" role="status">
-            message envoyé, merci ! je vous réponds rapidement.
-          </p>
+          <p class="feedback success" role="status">{{ t(text.sent) }}</p>
         } @else {
           <form [formGroup]="form" (ngSubmit)="submit()">
             <div class="field">
-              <label for="name">nom</label>
+              <label for="name">{{ t(text.nameLabel) }}</label>
               <input id="name" type="text" formControlName="name" autocomplete="name" />
               @if (form.controls.name.touched && form.controls.name.invalid) {
-                <p class="error" role="alert">votre nom est requis.</p>
+                <p class="error" role="alert">{{ t(text.nameError) }}</p>
               }
             </div>
             <div class="field">
-              <label for="email">e-mail</label>
+              <label for="email">{{ t(text.emailLabel) }}</label>
               <input id="email" type="email" formControlName="email" autocomplete="email" />
               @if (form.controls.email.touched && form.controls.email.invalid) {
-                <p class="error" role="alert">une adresse e-mail valide est requise.</p>
+                <p class="error" role="alert">{{ t(text.emailError) }}</p>
               }
             </div>
             <div class="field">
-              <label for="message">message</label>
+              <label for="message">{{ t(text.messageLabel) }}</label>
               <textarea id="message" rows="5" formControlName="message"></textarea>
               @if (form.controls.message.touched && form.controls.message.invalid) {
-                <p class="error" role="alert">un message d'au moins 10 caractères est requis.</p>
+                <p class="error" role="alert">{{ t(text.messageError) }}</p>
               }
             </div>
             @if (state() === 'error') {
-              <p class="feedback failure" role="alert">
-                l'envoi a échoué. réessayez plus tard ou écrivez-moi directement par e-mail.
-              </p>
+              <p class="feedback failure" role="alert">{{ t(text.failure) }}</p>
             }
             <button type="submit" class="cta" [disabled]="state() === 'sending'">
-              {{ state() === 'sending' ? 'envoi...' : 'envoyer le message →' }}
+              {{ state() === 'sending' ? t(text.sending) : t(text.send) }}
             </button>
           </form>
         }
@@ -59,7 +52,7 @@
               <p class="channel-value">{{ email }}</p>
             </div>
             <button type="button" (click)="copy()">
-              {{ copied() ? 'copié !' : 'copier' }} →
+              {{ copied() ? t(text.copied) : t(text.copy) }} →
             </button>
           </div>
           @for (profile of profiles; track profile.label) {
@@ -68,18 +61,18 @@
                 <p class="channel-label">{{ profile.label }}</p>
                 <p class="channel-value">{{ profile.value }}</p>
               </div>
-              <a [href]="profile.url" rel="noopener" target="_blank">visiter →</a>
+              <a [href]="profile.url" rel="noopener" target="_blank">{{ t(text.visit) }} →</a>
             </div>
           }
         </div>
 
         <div class="status-card">
-          <p class="status-title">// statut actuel</p>
+          <p class="status-title">{{ t(text.statusTitle) }}</p>
           <div class="status-rows">
-            @for (row of statusRows; track row.label) {
+            @for (row of statusRows; track row.label.fr) {
               <div class="status-row">
-                <span class="status-label">{{ row.label }}</span>
-                <span [class.highlight]="row.highlight">{{ row.value }}</span>
+                <span class="status-label">{{ t(row.label) }}</span>
+                <span [class.highlight]="row.highlight">{{ t(row.value) }}</span>
               </div>
             }
           </div>

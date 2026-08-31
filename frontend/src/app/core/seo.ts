@@ -4,6 +4,7 @@ import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from './site';
 
 export interface PageSeo {
   title: string;
+  fullTitle?: string;
   description?: string;
   path: string;
   type?: 'website' | 'profile' | 'article';
@@ -19,7 +20,8 @@ export class Seo {
 
   setPage(seo: PageSeo): void {
     const fullTitle =
-      seo.path === '/' ? `${SITE_NAME} | Développeur full-stack` : `${seo.title} | ${SITE_NAME}`;
+      seo.fullTitle ??
+      (seo.path === '/' ? `${SITE_NAME} | Développeur full-stack` : `${seo.title} | ${SITE_NAME}`);
     const description = seo.description ?? DEFAULT_DESCRIPTION;
     const url = `${SITE_URL}${seo.path}`;
 
@@ -34,6 +36,22 @@ export class Seo {
     this.meta.updateTag({ name: 'twitter:title', content: fullTitle });
     this.meta.updateTag({ name: 'twitter:description', content: description });
     this.setCanonical(url);
+  }
+
+  setLocale(lang: string, alternates: { lang: string; url: string }[]): void {
+    this.document.documentElement.lang = lang;
+    for (const link of Array.from(
+      this.document.head.querySelectorAll('link[rel="alternate"][hreflang]'),
+    )) {
+      link.remove();
+    }
+    for (const alternate of alternates) {
+      const link = this.document.createElement('link');
+      link.rel = 'alternate';
+      link.hreflang = alternate.lang;
+      link.href = alternate.url;
+      this.document.head.appendChild(link);
+    }
   }
 
   setJsonLd(id: string, data: Record<string, unknown>): void {

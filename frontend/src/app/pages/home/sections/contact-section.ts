@@ -1,9 +1,68 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LocaleService } from '../../../core/i18n';
 import { PortfolioApi } from '../../../core/portfolio-api';
 import { GITHUB_URL, LINKEDIN_URL } from '../../../core/site';
 
 const EMAIL = 'bryanferrando59@gmail.com';
+
+const TEXT = {
+  label: { fr: '[04] - contact', en: '[04] - contact' },
+  title: { fr: 'Travaillons ensemble', en: "Let's work together" },
+  intro: {
+    fr: "Ouvert aux opportunités, aux collaborations techniques et aux projets intéressants. N'hésitez pas à m'écrire, réponse rapide garantie.",
+    en: 'Open to opportunities, technical collaborations and interesting projects. Feel free to write to me, quick reply guaranteed.',
+  },
+  sent: {
+    fr: 'message envoyé, merci ! je vous réponds rapidement.',
+    en: 'message sent, thank you! i will get back to you shortly.',
+  },
+  nameLabel: { fr: 'nom', en: 'name' },
+  nameError: { fr: 'votre nom est requis.', en: 'your name is required.' },
+  emailLabel: { fr: 'e-mail', en: 'e-mail' },
+  emailError: {
+    fr: 'une adresse e-mail valide est requise.',
+    en: 'a valid e-mail address is required.',
+  },
+  messageLabel: { fr: 'message', en: 'message' },
+  messageError: {
+    fr: "un message d'au moins 10 caractères est requis.",
+    en: 'a message of at least 10 characters is required.',
+  },
+  failure: {
+    fr: "l'envoi a échoué. réessayez plus tard ou écrivez-moi directement par e-mail.",
+    en: 'sending failed. try again later or write to me directly by e-mail.',
+  },
+  sending: { fr: 'envoi...', en: 'sending...' },
+  send: { fr: 'envoyer le message →', en: 'send the message →' },
+  copy: { fr: 'copier', en: 'copy' },
+  copied: { fr: 'copié !', en: 'copied!' },
+  visit: { fr: 'visiter', en: 'visit' },
+  statusTitle: { fr: '// statut actuel', en: '// current status' },
+};
+
+const STATUS_ROWS = [
+  {
+    label: { fr: 'actuellement', en: 'currently' },
+    value: { fr: 'alternant @ Magellan', en: 'apprentice @ Magellan' },
+    highlight: false,
+  },
+  {
+    label: { fr: 'études', en: 'studies' },
+    value: { fr: 'Epitech, MSc', en: 'Epitech, MSc' },
+    highlight: false,
+  },
+  {
+    label: { fr: 'localisation', en: 'location' },
+    value: { fr: 'Hauts-de-France / remote', en: 'Hauts-de-France, France / remote' },
+    highlight: false,
+  },
+  {
+    label: { fr: 'ouvert aux', en: 'open to' },
+    value: { fr: 'opportunités & projets', en: 'opportunities & projects' },
+    highlight: true,
+  },
+];
 
 type SubmissionState = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -17,6 +76,9 @@ export class ContactSection {
   private readonly api = inject(PortfolioApi);
   private readonly formBuilder = inject(FormBuilder);
 
+  protected readonly t = inject(LocaleService).t;
+  protected readonly text = TEXT;
+  protected readonly statusRows = STATUS_ROWS;
   protected readonly email = EMAIL;
   protected readonly copied = signal(false);
   protected readonly state = signal<SubmissionState>('idle');
@@ -30,13 +92,6 @@ export class ContactSection {
   protected readonly profiles = [
     { label: 'github', value: 'github.com/BryanFRD', url: GITHUB_URL },
     { label: 'linkedin', value: 'linkedin.com/in/bryan-ferrando', url: LINKEDIN_URL },
-  ];
-
-  protected readonly statusRows = [
-    { label: 'actuellement', value: 'alternant @ Magellan', highlight: false },
-    { label: 'études', value: 'Epitech, MSc', highlight: false },
-    { label: 'localisation', value: 'Hauts-de-France / remote', highlight: false },
-    { label: 'ouvert aux', value: 'opportunités & projets', highlight: true },
   ];
 
   protected copy(): void {

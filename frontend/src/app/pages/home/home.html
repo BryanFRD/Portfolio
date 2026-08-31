@@ -1,18 +1,25 @@
 <nav class="navbar" aria-label="Navigation principale">
   <span class="navbar-brand">&gt; bryan.ferrando</span>
-  <ul>
-    @for (link of navLinks; track link.id) {
-      <li>
-        <button
-          type="button"
-          [class.active]="activeSection() === link.id"
-          (click)="scrollTo(link.id)"
-        >
-          {{ link.label }}
-        </button>
-      </li>
-    }
-  </ul>
+  <div class="navbar-right">
+    <ul>
+      @for (link of navLinks; track link.id) {
+        <li>
+          <button
+            type="button"
+            [class.active]="activeSection() === link.id"
+            (click)="scrollTo(link.id)"
+          >
+            {{ t(link.label) }}
+          </button>
+        </li>
+      }
+    </ul>
+    <div class="navbar-lang" translate="no">
+      <a routerLink="/" [class.active]="locale() === 'fr'">fr</a>
+      <span aria-hidden="true">/</span>
+      <a routerLink="/en" [class.active]="locale() === 'en'">en</a>
+    </div>
+  </div>
 </nav>
 
 <app-hero-section (navigate)="scrollTo($event)" />

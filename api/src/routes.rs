@@ -95,16 +95,26 @@ mod tests {
     use tower::ServiceExt;
 
     use super::*;
+    use crate::model::LocalizedText;
 
     fn test_router() -> Router {
         router(AppState {
             projects: Arc::new(vec![Project {
                 slug: "demo".into(),
                 name: "Demo".into(),
-                category: "Outillage".into(),
-                status: "en prod".into(),
+                category: LocalizedText {
+                    fr: "Outillage".into(),
+                    en: "Tooling".into(),
+                },
+                status: LocalizedText {
+                    fr: "en prod".into(),
+                    en: "in prod".into(),
+                },
                 year: 2026,
-                description: "A demo project".into(),
+                description: LocalizedText {
+                    fr: "Un projet de démo".into(),
+                    en: "A demo project".into(),
+                },
                 technologies: vec!["Rust".into()],
                 featured: true,
                 repository_url: None,

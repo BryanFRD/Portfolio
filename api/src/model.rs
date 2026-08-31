@@ -2,14 +2,20 @@ use serde::{Deserialize, Serialize};
 use validator::Validate;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct LocalizedText {
+    pub fr: String,
+    pub en: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Project {
     pub slug: String,
     pub name: String,
-    pub category: String,
-    pub status: String,
+    pub category: LocalizedText,
+    pub status: LocalizedText,
     pub year: u16,
-    pub description: String,
+    pub description: LocalizedText,
     pub technologies: Vec<String>,
     #[serde(default)]
     pub featured: bool,
@@ -47,17 +53,24 @@ mod tests {
         let projects = load_projects();
         assert!(!projects.is_empty());
         assert!(projects.iter().all(|project| !project.slug.is_empty()));
+        assert!(projects.iter().all(
+            |project| !project.description.fr.is_empty() && !project.description.en.is_empty()
+        ));
     }
 
     #[test]
     fn project_serializes_to_camel_case_and_omits_empty_links() {
+        let localized = |fr: &str, en: &str| LocalizedText {
+            fr: fr.into(),
+            en: en.into(),
+        };
         let project = Project {
             slug: "demo".into(),
             name: "Demo".into(),
-            category: "Outillage".into(),
-            status: "en prod".into(),
+            category: localized("Outillage", "Tooling"),
+            status: localized("en prod", "in prod"),
             year: 2026,
-            description: "A demo project".into(),
+            description: localized("Un projet de démo", "A demo project"),
             technologies: vec!["Rust".into()],
             featured: false,
             repository_url: Some("https://example.com/repo".into()),
@@ -69,6 +82,7 @@ mod tests {
         let json = serde_json::to_value(&project).unwrap();
 
         assert_eq!(json["repositoryUrl"], "https://example.com/repo");
+        assert_eq!(json["category"]["en"], "Tooling");
         assert!(json.get("liveUrl").is_none());
         assert!(json.get("imageUrl").is_none());
         assert!(json.get("logoUrl").is_none());

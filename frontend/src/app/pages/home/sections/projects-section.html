@@ -2,16 +2,18 @@
   <div class="container">
     <div class="section-head">
       <div>
-        <p class="label">[02] - travaux</p>
-        <h2 class="section-title">Projets sélectionnés</h2>
+        <p class="label">{{ t(text.label) }}</p>
+        <h2 class="section-title">{{ t(text.title) }}</h2>
       </div>
-      <span class="count">{{ projects.value().length }} projets</span>
+      <span class="count">{{ projects.value().length }} {{ t(text.count) }}</span>
     </div>
 
     @if (projects.isLoading()) {
-      <p class="state" role="status">chargement des projets…</p>
+      <p class="state" role="status">{{ t(text.loading) }}</p>
     } @else if (projects.error()) {
-      <p class="state" role="alert">erreur : impossible de charger les projets.</p>
+      <p class="state" role="alert">{{ t(text.error) }}</p>
+    } @else if (projects.value().length === 0) {
+      <p class="state">{{ t(text.empty) }}</p>
     } @else {
       <div class="rows">
         @for (project of projects.value(); track project.slug; let i = $index) {
@@ -34,9 +36,9 @@
                     {{ project.name }}
                   }
                 </h3>
-                <span class="status-badge">{{ project.status }}</span>
+                <span class="status-badge">{{ t(project.status) }}</span>
               </div>
-              <p class="desc">{{ project.description }}</p>
+              <p class="desc">{{ t(project.description) }}</p>
               <div class="tags">
                 @for (tech of project.technologies; track tech) {
                   <span class="tag">{{ tech }}</span>
