@@ -9,16 +9,7 @@
 }
 
 .section-head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem;
   margin-bottom: 4rem;
-
-  .count {
-    font-size: 0.75rem;
-    color: var(--muted-foreground);
-  }
 }
 
 .state {

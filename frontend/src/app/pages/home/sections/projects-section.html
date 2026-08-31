@@ -1,11 +1,8 @@
 <section id="projets" class="section">
   <div class="container">
     <div class="section-head">
-      <div>
-        <p class="label">{{ t(text.label) }}</p>
-        <h2 class="section-title">{{ t(text.title) }}</h2>
-      </div>
-      <span class="count">{{ projects.value().length }} {{ t(text.count) }}</span>
+      <p class="label">{{ t(text.label) }}</p>
+      <h2 class="section-title">{{ t(text.title) }}</h2>
     </div>
 
     @if (projects.isLoading()) {

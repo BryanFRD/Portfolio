@@ -6,7 +6,6 @@ import { Parallax } from '../../../shared/parallax';
 const TEXT = {
   label: { fr: '[02] - travaux', en: '[02] - work' },
   title: { fr: 'Projets sélectionnés', en: 'Selected projects' },
-  count: { fr: 'projets', en: 'projects' },
   loading: { fr: 'chargement des projets…', en: 'loading projects…' },
   error: {
     fr: 'erreur : impossible de charger les projets.',
