@@ -75,6 +75,11 @@ export class Home {
     });
 
     afterNextRender(() => {
+      if (this.localeService.pendingScrollY !== null) {
+        const top = this.localeService.pendingScrollY;
+        this.localeService.pendingScrollY = null;
+        setTimeout(() => window.scrollTo({ top, behavior: 'instant' }));
+      }
       const observer = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
@@ -96,5 +101,9 @@ export class Home {
 
   protected scrollTo(id: string): void {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  protected storeScroll(): void {
+    this.localeService.pendingScrollY = window.scrollY;
   }
 }

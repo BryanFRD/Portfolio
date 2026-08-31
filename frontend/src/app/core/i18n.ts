@@ -12,6 +12,7 @@ export interface Localized<T = string> {
 })
 export class LocaleService {
   readonly locale = signal<Locale>('fr');
+  pendingScrollY: number | null = null;
 
   readonly t = <T>(value: Localized<T>): T => value[this.locale()];
 }

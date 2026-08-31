@@ -15,9 +15,9 @@
       }
     </ul>
     <div class="navbar-lang" translate="no">
-      <a routerLink="/" [class.active]="locale() === 'fr'">fr</a>
+      <a routerLink="/" (click)="storeScroll()" [class.active]="locale() === 'fr'">fr</a>
       <span aria-hidden="true">/</span>
-      <a routerLink="/en" [class.active]="locale() === 'en'">en</a>
+      <a routerLink="/en" (click)="storeScroll()" [class.active]="locale() === 'en'">en</a>
     </div>
   </div>
 </nav>
