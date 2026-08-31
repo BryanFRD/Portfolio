@@ -7,10 +7,37 @@ import { Component } from '@angular/core';
 })
 export class StackSection {
   protected readonly stack = [
-    { category: 'Frontend', items: ['TypeScript', 'Angular', 'React', 'Sass', 'Tailwind CSS'] },
-    { category: 'Backend', items: ['Rust', 'Axum', 'Node.js', 'Java', 'PHP', 'Python'] },
-    { category: 'Jeux & 3D', items: ['Unity', 'C#'] },
-    { category: 'Data & Infra', items: ['PostgreSQL', 'Docker', 'GitHub Actions', 'FerrFlow'] },
+    {
+      category: 'Frontend',
+      items: ['TypeScript', 'JavaScript', 'Angular', 'React', 'Vue', 'Astro', 'Sass', 'Tailwind CSS'],
+    },
+    {
+      category: 'Backend',
+      items: ['Rust', 'Axum', 'SQLx', 'Node.js', 'Express', 'Java', 'Go', 'PHP', 'Python'],
+    },
+    {
+      category: 'Jeux & 3D',
+      items: ['Unity', 'C#'],
+    },
+    {
+      category: 'Data',
+      items: ['PostgreSQL', 'TimescaleDB', 'Redis'],
+    },
+    {
+      category: 'Infra & CI/CD',
+      items: [
+        'Docker',
+        'Kubernetes',
+        'FluxCD',
+        'Helm',
+        'Traefik',
+        'Ansible',
+        'GitHub Actions',
+        'FerrFlow',
+        'Grafana',
+        'Prometheus',
+      ],
+    },
   ];
 
   protected readonly timeline = [
