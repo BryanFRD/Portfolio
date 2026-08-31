@@ -1,0 +1,25 @@
+@if (open()) {
+  <div class="terminal" role="dialog" aria-label="Terminal">
+    <div class="terminal-header">
+      <span>bryan&#64;ferrlabs:~</span>
+      <button type="button" (click)="close()" aria-label="Fermer le terminal">×</button>
+    </div>
+    <div class="terminal-body">
+      @for (line of lines(); track $index) {
+        <p>{{ line }}</p>
+      }
+      <div class="terminal-prompt">
+        <span aria-hidden="true">$</span>
+        <input
+          #promptInput
+          type="text"
+          (keydown.enter)="run(promptInput)"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          aria-label="Commande"
+        />
+      </div>
+    </div>
+  </div>
+}

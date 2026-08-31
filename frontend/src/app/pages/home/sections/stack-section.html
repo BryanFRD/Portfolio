@@ -1,0 +1,40 @@
+<section id="stack" class="section">
+  <div class="container">
+    <div class="section-head">
+      <p class="label">[03] - outils</p>
+      <h2 class="section-title">Stack technique</h2>
+    </div>
+
+    <div class="stack-layout">
+      <div class="timeline-block">
+        <p class="timeline-title">// parcours</p>
+        <ol class="timeline">
+          @for (step of timeline; track step.year) {
+            <li>
+              <span class="timeline-year">{{ step.year }}</span>
+              <p class="timeline-label">{{ step.title }}</p>
+              <div class="timeline-tags">
+                @for (tag of step.tags; track tag) {
+                  <span class="timeline-tag">{{ tag }}</span>
+                }
+              </div>
+            </li>
+          }
+        </ol>
+      </div>
+
+      <div class="stack-grid">
+        @for (group of stack; track group.category) {
+          <div class="stack-cell">
+            <p class="stack-category">{{ group.category }}</p>
+            <div class="stack-items">
+              @for (item of group.items; track item) {
+                <span class="stack-item">{{ item }}</span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

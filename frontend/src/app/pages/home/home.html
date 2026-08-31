@@ -1,0 +1,26 @@
+<nav class="navbar" aria-label="Navigation principale">
+  <span class="navbar-brand">&gt; bryan.ferrando</span>
+  <ul>
+    @for (link of navLinks; track link.id) {
+      <li>
+        <button
+          type="button"
+          [class.active]="activeSection() === link.id"
+          (click)="scrollTo(link.id)"
+        >
+          {{ link.label }}
+        </button>
+      </li>
+    }
+  </ul>
+</nav>
+
+<app-hero-section (navigate)="scrollTo($event)" />
+<app-projects-section />
+<app-stack-section />
+<app-contact-section />
+
+<footer class="footer">
+  <span>© {{ currentYear }} Bryan Ferrando</span>
+  <span>built with Angular + Rust <span class="footer-arrow" aria-hidden="true">↑</span></span>
+</footer>

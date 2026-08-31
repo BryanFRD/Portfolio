@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ferrflow.com/schema/ferrflow.json",
+  "workspace": {
+    "tagTemplate": "{name}@v{version}",
+    "recoverMissedReleases": true,
+    "skipCi": true,
+    "branches": [
+      { "name": "main", "channel": false },
+      { "name": "*", "channel": "dev" }
+    ]
+  },
+  "package": [
+    {
+      "name": "frontend",
+      "path": "frontend",
+      "versionedFiles": [
+        { "path": "frontend/package.json", "format": "json" }
+      ],
+      "changelog": "frontend/CHANGELOG.md"
+    },
+    {
+      "name": "api",
+      "path": "api",
+      "versionedFiles": [
+        { "path": "api/Cargo.toml", "format": "toml" }
+      ],
+      "changelog": "api/CHANGELOG.md"
+    }
+  ]
+}

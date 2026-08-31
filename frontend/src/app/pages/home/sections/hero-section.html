@@ -1,0 +1,41 @@
+<section id="hero" class="hero">
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="status" aria-hidden="true">
+    <span class="status-year">{{ currentYear }} - disponible</span>
+    <span class="status-open"><span class="dot"></span>open to work</span>
+  </div>
+
+  <div class="hero-content">
+    <p class="label">[init] - bonjour, je suis</p>
+    <h1 class="hero-name">
+      <span aria-hidden="true">{{ line1() }}</span>
+      <span class="visually-hidden">Bryan Ferrando</span>
+      @if (phase() === 'name') {
+        <span class="cursor blink" aria-hidden="true">_</span>
+      }
+    </h1>
+    <h2 class="hero-role">
+      <span aria-hidden="true">{{ line2() }}</span>
+      <span class="visually-hidden">Développeur Full-Stack & créateur de FerrLabs</span>
+      @if (phase() === 'role') {
+        <span class="cursor blink" aria-hidden="true">_</span>
+      } @else if (phase() === 'done') {
+        <span class="cursor" aria-hidden="true">_</span>
+      }
+    </h2>
+    <div class="hero-actions">
+      <button type="button" class="btn-primary" (click)="navigate.emit('projets')">
+        voir les projets →
+      </button>
+      <button type="button" class="btn-ghost" (click)="navigate.emit('contact')">
+        me contacter
+      </button>
+    </div>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <span class="scroll-line"></span>
+    <span class="scroll-text">scroll</span>
+  </div>
+</section>

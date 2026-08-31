@@ -1,0 +1,81 @@
+name: Docker
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to build'
+        type: choice
+        options:
+          - frontend
+          - api
+      version:
+        description: 'Version (without v prefix)'
+        required: true
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+  attestations: write
+  security-events: write
+
+jobs:
+  meta:
+    name: Resolve build parameters
+    runs-on: ferrlabs-k8s-light
+    outputs:
+      package: ${{ steps.meta.outputs.package }}
+      version: ${{ steps.meta.outputs.version }}
+      major_minor: ${{ steps.meta.outputs.major_minor }}
+    steps:
+      - id: meta
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            PACKAGE="${{ inputs.package }}"
+            VERSION="${{ inputs.version }}"
+          else
+            TAG="${{ github.event.release.tag_name }}"
+            PACKAGE="${TAG%@v*}"
+            VERSION="${TAG#*@v}"
+          fi
+          {
+            echo "package=${PACKAGE}"
+            echo "version=${VERSION}"
+            echo "major_minor=$(echo "${VERSION}" | cut -d. -f1-2)"
+          } >> "$GITHUB_OUTPUT"
+
+  frontend:
+    name: Build & Push frontend
+    needs: meta
+    if: needs.meta.outputs.package == 'frontend'
+    uses: FerrLabs/.github/.github/workflows/reusable-docker-build.yml@34983febd6f8a4d7aa5c78f7581dbc2ecaac5c88 # main
+    with:
+      runner: ferrlabs-k8s
+      image-name: ghcr.io/ferrlabs/portfolio/frontend
+      tag: ${{ needs.meta.outputs.version }}
+      context: .
+      dockerfile: frontend/Dockerfile
+      platforms: linux/amd64
+      extra-tags: ghcr.io/ferrlabs/portfolio/frontend:${{ needs.meta.outputs.major_minor }}
+    secrets:
+      packages-read: ${{ secrets.FERRFLOW_PACKAGES_READ || secrets.GITHUB_TOKEN }}
+
+  api:
+    name: Build & Push api
+    needs: meta
+    if: needs.meta.outputs.package == 'api'
+    uses: FerrLabs/.github/.github/workflows/reusable-docker-build.yml@34983febd6f8a4d7aa5c78f7581dbc2ecaac5c88 # main
+    with:
+      runner: ferrlabs-k8s
+      image-name: ghcr.io/ferrlabs/portfolio/api
+      tag: ${{ needs.meta.outputs.version }}
+      context: .
+      dockerfile: api/Dockerfile
+      platforms: linux/amd64
+      extra-tags: ghcr.io/ferrlabs/portfolio/api:${{ needs.meta.outputs.major_minor }}
+    secrets:
+      packages-read: ${{ secrets.FERRFLOW_PACKAGES_READ || secrets.GITHUB_TOKEN }}

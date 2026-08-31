@@ -1,0 +1,77 @@
+[
+  {
+    "slug": "ferrlabs",
+    "name": "FerrLabs",
+    "category": "Suite d'outils",
+    "status": "en prod",
+    "year": 2026,
+    "description": "La suite d'outils que je construis : FerrFlow (releases), FerrVault (secrets), FerrTrack (issues), FerrGrowth (sites marketing), FerrFleet (agents), FerrLens (outils web) et FerrGames. Le tout sur une plateforme commune (comptes, organisations, billing), un cluster Kubernetes en GitOps et une status page publique.",
+    "technologies": ["Rust", "TypeScript", "Angular", "Kubernetes", "PostgreSQL"],
+    "featured": true,
+    "liveUrl": "https://ferrlabs.com",
+    "logoUrl": "/logos/ferrlabs.svg"
+  },
+  {
+    "slug": "ferrgames",
+    "name": "FerrGames",
+    "category": "Jeux en ligne",
+    "status": "en prod",
+    "year": 2026,
+    "description": "Une collection de petits jeux multijoueurs à jouer dans le navigateur, entre amis : pas d'installation, pas de compte, on ouvre un salon et on partage le lien. Serveurs temps réel écrits en Rust.",
+    "technologies": ["Rust", "Multijoueur", "Navigateur"],
+    "featured": true,
+    "liveUrl": "https://ferrgames.com",
+    "logoUrl": "/logos/ferrgames.svg"
+  },
+  {
+    "slug": "ferrflow",
+    "name": "FerrFlow",
+    "category": "Outillage",
+    "status": "en prod",
+    "year": 2026,
+    "description": "Versioning sémantique universel pour monorepos et repos classiques : un binaire Rust lit les commits conventionnels, met à jour 16 formats de fichiers de version, écrit le changelog et publie la release. Distribué en GitHub Action, et c'est lui qui versionne ce site.",
+    "technologies": ["Rust", "GitHub Actions", "Semver"],
+    "featured": true,
+    "repositoryUrl": "https://github.com/FerrLabs/FerrFlow",
+    "liveUrl": "https://ferrflow.com",
+    "logoUrl": "/logos/ferrflow.svg"
+  },
+  {
+    "slug": "lfsx",
+    "name": "LFSX",
+    "category": "Outillage",
+    "status": "open source",
+    "year": 2026,
+    "description": "Serveur Git LFS rapide, léger et sécurisé, écrit en Rust. Une alternative auto-hébergeable pour sortir les gros fichiers de Git sans dépendre d'un service tiers.",
+    "technologies": ["Rust", "Git LFS"],
+    "featured": true,
+    "repositoryUrl": "https://github.com/FerrLabs/LFSX",
+    "liveUrl": "https://lfsx.dev",
+    "logoUrl": "/logos/lfsx.svg"
+  },
+  {
+    "slug": "idlewarden",
+    "name": "IdleWarden",
+    "category": "Application desktop",
+    "status": "open source",
+    "year": 2026,
+    "description": "Plateforme d'automatisation extensible pour les jeux idle et incrémentaux solo sur Windows. Cœur en Rust, plugins communautaires via un registre public, mises à jour signées, et aucun contournement d'anti-cheat.",
+    "technologies": ["Rust", "Windows", "Plugins"],
+    "featured": true,
+    "repositoryUrl": "https://github.com/IdleWarden/idlewarden",
+    "liveUrl": "https://idlewarden.com",
+    "logoUrl": "/logos/idlewarden.svg"
+  },
+  {
+    "slug": "archego",
+    "name": "Archego",
+    "category": "Projet client",
+    "status": "en prod",
+    "year": 2025,
+    "description": "Plateforme web complète pour un client : application publique, interface d'administration et backend Rust. Monorepo pnpm, CI GitHub Actions, images Docker, releases FerrFlow.",
+    "technologies": ["TypeScript", "Rust", "Axum", "SQLx", "PostgreSQL", "Docker"],
+    "featured": false,
+    "liveUrl": "https://archego.fr",
+    "logoUrl": "/logos/archego.svg"
+  }
+]

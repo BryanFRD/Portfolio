@@ -1,0 +1,90 @@
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-head">
+      <p class="label">[04] - contact</p>
+      <h2 class="section-title">Travaillons ensemble</h2>
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <p class="intro">
+          Ouvert aux opportunités, aux collaborations techniques et aux projets intéressants.
+          N'hésitez pas à m'écrire, réponse rapide garantie.
+        </p>
+
+        @if (state() === 'sent') {
+          <p class="feedback success" role="status">
+            message envoyé, merci ! je vous réponds rapidement.
+          </p>
+        } @else {
+          <form [formGroup]="form" (ngSubmit)="submit()">
+            <div class="field">
+              <label for="name">nom</label>
+              <input id="name" type="text" formControlName="name" autocomplete="name" />
+              @if (form.controls.name.touched && form.controls.name.invalid) {
+                <p class="error" role="alert">votre nom est requis.</p>
+              }
+            </div>
+            <div class="field">
+              <label for="email">e-mail</label>
+              <input id="email" type="email" formControlName="email" autocomplete="email" />
+              @if (form.controls.email.touched && form.controls.email.invalid) {
+                <p class="error" role="alert">une adresse e-mail valide est requise.</p>
+              }
+            </div>
+            <div class="field">
+              <label for="message">message</label>
+              <textarea id="message" rows="6" formControlName="message"></textarea>
+              @if (form.controls.message.touched && form.controls.message.invalid) {
+                <p class="error" role="alert">un message d'au moins 10 caractères est requis.</p>
+              }
+            </div>
+            @if (state() === 'error') {
+              <p class="feedback failure" role="alert">
+                l'envoi a échoué. réessayez plus tard ou écrivez-moi directement par e-mail.
+              </p>
+            }
+            <button type="submit" class="cta" [disabled]="state() === 'sending'">
+              {{ state() === 'sending' ? 'envoi...' : 'envoyer le message →' }}
+            </button>
+          </form>
+        }
+      </div>
+
+      <div class="side">
+        <div class="channels">
+          <div class="channel">
+            <div>
+              <p class="channel-label">email</p>
+              <p class="channel-value">{{ email }}</p>
+            </div>
+            <button type="button" (click)="copy()">
+              {{ copied() ? 'copié !' : 'copier' }} →
+            </button>
+          </div>
+          @for (profile of profiles; track profile.label) {
+            <div class="channel">
+              <div>
+                <p class="channel-label">{{ profile.label }}</p>
+                <p class="channel-value">{{ profile.value }}</p>
+              </div>
+              <a [href]="profile.url" rel="noopener" target="_blank">visiter →</a>
+            </div>
+          }
+        </div>
+
+        <div class="status-card">
+          <p class="status-title">// statut actuel</p>
+          <div class="status-rows">
+            @for (row of statusRows; track row.label) {
+              <div class="status-row">
+                <span class="status-label">{{ row.label }}</span>
+                <span [class.highlight]="row.highlight">{{ row.value }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

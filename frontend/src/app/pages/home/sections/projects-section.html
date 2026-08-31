@@ -1,0 +1,65 @@
+<section id="projets" class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="label">[02] - travaux</p>
+        <h2 class="section-title">Projets sélectionnés</h2>
+      </div>
+      <span class="count">{{ projects.value().length }} projets</span>
+    </div>
+
+    @if (projects.isLoading()) {
+      <p class="state" role="status">chargement des projets…</p>
+    } @else if (projects.error()) {
+      <p class="state" role="alert">erreur : impossible de charger les projets.</p>
+    } @else {
+      <div class="rows">
+        @for (project of projects.value(); track project.slug; let i = $index) {
+          <article class="row">
+            <div class="row-meta">
+              <span>{{ pad(i) }}</span>
+              <span>{{ project.year }}</span>
+            </div>
+            <div class="row-body">
+              <div class="row-title">
+                <h3>
+                  @if (project.repositoryUrl || project.liveUrl) {
+                    <a
+                      [href]="project.liveUrl ?? project.repositoryUrl"
+                      rel="noopener"
+                      target="_blank"
+                      >{{ project.name }}</a
+                    >
+                  } @else {
+                    {{ project.name }}
+                  }
+                </h3>
+                <span class="status-badge">{{ project.status }}</span>
+              </div>
+              <p class="desc">{{ project.description }}</p>
+              <div class="tags">
+                @for (tech of project.technologies; track tech) {
+                  <span class="tag">{{ tech }}</span>
+                }
+              </div>
+            </div>
+            <div class="row-visual" aria-hidden="true">
+              @if (project.imageUrl) {
+                <img class="cover" [src]="project.imageUrl" [alt]="project.name" loading="lazy" />
+              } @else if (project.logoUrl) {
+                <div class="logo-tile">
+                  <img [src]="project.logoUrl" alt="" />
+                </div>
+              } @else {
+                <div class="placeholder">
+                  <span>{{ pad(i) }}</span>
+                </div>
+              }
+            </div>
+          </article>
+        }
+        <div class="rows-end"></div>
+      </div>
+    }
+  </div>
+</section>

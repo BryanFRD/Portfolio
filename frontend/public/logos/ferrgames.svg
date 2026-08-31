@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#F5DC8B"/>
+  <text
+    x="16" y="24"
+    font-family="Fraunces, Georgia, 'Times New Roman', serif"
+    font-size="22"
+    font-weight="900"
+    font-style="italic"
+    text-anchor="middle"
+    fill="#1A1812"
+    letter-spacing="-0.5"
+  >F.</text>
+</svg>

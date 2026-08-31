@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "api",
+      "runtimeExecutable": "cargo",
+      "runtimeArgs": ["run", "--manifest-path", "api/Cargo.toml"],
+      "port": 8080
+    },
+    {
+      "name": "web",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["frontend/dist/portfolio-frontend/server/server.mjs"],
+      "port": 4000
+    }
+  ]
+}
