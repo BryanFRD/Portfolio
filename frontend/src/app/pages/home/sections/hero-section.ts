@@ -1,4 +1,5 @@
 import { afterNextRender, Component, output, signal } from '@angular/core';
+import { Parallax } from '../../../shared/parallax';
 
 const NAME = 'Bryan Ferrando';
 const ROLE = 'Développeur Full-Stack & créateur de FerrLabs';
@@ -7,6 +8,7 @@ type TypingPhase = 'idle' | 'name' | 'role' | 'done';
 
 @Component({
   selector: 'app-hero-section',
+  imports: [Parallax],
   templateUrl: './hero-section.html',
   styleUrl: './hero-section.scss',
 })

@@ -1,8 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { PortfolioApi } from '../../../core/portfolio-api';
+import { Parallax } from '../../../shared/parallax';
 
 @Component({
   selector: 'app-projects-section',
+  imports: [Parallax],
   templateUrl: './projects-section.html',
   styleUrl: './projects-section.scss',
 })
