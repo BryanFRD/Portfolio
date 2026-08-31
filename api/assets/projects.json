@@ -69,7 +69,7 @@
     "status": "en prod",
     "year": 2025,
     "description": "Plateforme web complète pour un client : application publique, interface d'administration et backend Rust. Monorepo pnpm, CI GitHub Actions, images Docker, releases FerrFlow.",
-    "technologies": ["TypeScript", "Rust", "Axum", "SQLx", "PostgreSQL", "Docker"],
+    "technologies": ["TypeScript", "Rust", "Axum", "SQLx", "PostgreSQL"],
     "featured": false,
     "liveUrl": "https://archego.fr",
     "logoUrl": "/logos/archego.svg"
