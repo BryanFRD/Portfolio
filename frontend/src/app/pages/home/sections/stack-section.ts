@@ -9,7 +9,7 @@ export class StackSection {
   protected readonly stack = [
     {
       category: 'Frontend',
-      items: ['TypeScript', 'JavaScript', 'Angular', 'React', 'Vue', 'Astro', 'Sass', 'Tailwind CSS'],
+      items: ['TypeScript', 'JavaScript', 'Angular', 'React', 'Astro', 'Sass', 'Tailwind CSS'],
     },
     {
       category: 'Backend',
@@ -21,7 +21,7 @@ export class StackSection {
     },
     {
       category: 'Data',
-      items: ['PostgreSQL', 'TimescaleDB', 'Redis'],
+      items: ['PostgreSQL', 'TimescaleDB', 'MongoDB', 'Redis'],
     },
     {
       category: 'Infra & CI/CD',
@@ -33,7 +33,6 @@ export class StackSection {
         'Traefik',
         'Ansible',
         'GitHub Actions',
-        'FerrFlow',
         'Grafana',
         'Prometheus',
       ],
