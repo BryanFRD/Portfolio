@@ -119,6 +119,7 @@ form .feedback {
 }
 
 .channel {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -160,6 +161,13 @@ form .feedback {
 
     &:hover {
       color: color-mix(in srgb, var(--primary) 70%, transparent);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
     }
   }
 }

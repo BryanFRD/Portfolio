@@ -18,6 +18,7 @@
 }
 
 .row {
+  position: relative;
   display: flex;
   gap: 2rem;
   padding: 2rem 0;
@@ -60,6 +61,13 @@
 
     a {
       text-decoration: none;
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        cursor: pointer;
+      }
     }
   }
 

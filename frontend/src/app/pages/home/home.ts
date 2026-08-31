@@ -1,4 +1,4 @@
-import { afterNextRender, Component, inject, signal } from '@angular/core';
+import { afterNextRender, Component, inject, OnDestroy, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LocaleService } from '../../core/i18n';
 import { Seo } from '../../core/seo';
@@ -36,9 +36,17 @@ const JOB_TITLE = {
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home {
+export class Home implements OnDestroy {
   private readonly seo = inject(Seo);
   private readonly localeService = inject(LocaleService);
+
+  private frame = 0;
+  private scrollBound = false;
+
+  private readonly onScroll = (): void => {
+    cancelAnimationFrame(this.frame);
+    this.frame = requestAnimationFrame(() => this.updateActiveSection());
+  };
 
   protected readonly t = this.localeService.t;
   protected readonly locale = this.localeService.locale;
@@ -78,25 +86,37 @@ export class Home {
       if (this.localeService.pendingScrollY !== null) {
         const top = this.localeService.pendingScrollY;
         this.localeService.pendingScrollY = null;
-        setTimeout(() => window.scrollTo({ top, behavior: 'instant' }));
+        setTimeout(() => {
+          window.scrollTo({ top, behavior: 'instant' });
+          this.updateActiveSection();
+        });
       }
-      const observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              this.activeSection.set(entry.target.id);
-            }
-          }
-        },
-        { threshold: 0.3 },
-      );
-      for (const link of NAV_LINKS) {
-        const element = document.getElementById(link.id);
-        if (element) {
-          observer.observe(element);
-        }
-      }
+      this.updateActiveSection();
+      this.scrollBound = true;
+      window.addEventListener('scroll', this.onScroll, { passive: true });
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.scrollBound) {
+      cancelAnimationFrame(this.frame);
+      window.removeEventListener('scroll', this.onScroll);
+    }
+  }
+
+  private updateActiveSection(): void {
+    const marker = window.scrollY + window.innerHeight * 0.35;
+    let current = NAV_LINKS[0].id;
+    for (const link of NAV_LINKS) {
+      const element = document.getElementById(link.id);
+      if (element && element.offsetTop <= marker) {
+        current = link.id;
+      }
+    }
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+      current = NAV_LINKS[NAV_LINKS.length - 1].id;
+    }
+    this.activeSection.set(current);
   }
 
   protected scrollTo(id: string): void {
