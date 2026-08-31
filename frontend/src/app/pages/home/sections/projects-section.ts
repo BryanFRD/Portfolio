@@ -4,7 +4,6 @@ import { PortfolioApi } from '../../../core/portfolio-api';
 import { Parallax } from '../../../shared/parallax';
 
 const TEXT = {
-  label: { fr: '[02] - travaux', en: '[02] - work' },
   title: { fr: 'Projets sélectionnés', en: 'Selected projects' },
   loading: { fr: 'chargement des projets…', en: 'loading projects…' },
   error: {
