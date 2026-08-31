@@ -10,12 +10,12 @@
 
 .grid-overlay {
   position: absolute;
-  inset: -4rem 0;
-  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  inset: 0;
   background-image:
     linear-gradient(var(--border) 1px, transparent 1px),
     linear-gradient(90deg, var(--border) 1px, transparent 1px);
   background-size: 80px 80px;
+  background-position: 0 var(--parallax-y, 0px);
   pointer-events: none;
   -webkit-mask-image:
     radial-gradient(ellipse 110% 110% at 0% 100%, #000 0%, transparent 70%),

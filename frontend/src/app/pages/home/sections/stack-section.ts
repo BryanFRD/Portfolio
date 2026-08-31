@@ -31,7 +31,7 @@ export class StackSection {
     {
       year: '2026',
       title: 'Alternance chez Magellan, rachat de la branche MeTS',
-      tags: ['Full-stack', 'MeTS'],
+      tags: ['Full-stack', 'MeTS', 'Secteur public'],
     },
   ];
 }
