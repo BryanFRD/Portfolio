@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { LocaleService } from '../../../core/i18n';
 
 const TEXT = {
-  label: { fr: '[03] - outils', en: '[03] - tools' },
   title: { fr: 'Stack technique', en: 'Tech stack' },
   timeline: { fr: '// parcours', en: '// journey' },
 };

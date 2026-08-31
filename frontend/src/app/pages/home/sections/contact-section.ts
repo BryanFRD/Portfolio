@@ -7,7 +7,6 @@ import { GITHUB_URL, LINKEDIN_URL } from '../../../core/site';
 const EMAIL = 'bryanferrando59@gmail.com';
 
 const TEXT = {
-  label: { fr: '[04] - contact', en: '[04] - contact' },
   title: { fr: 'Travaillons ensemble', en: "Let's work together" },
   intro: {
     fr: "Ouvert aux opportunités, aux collaborations techniques et aux projets intéressants. N'hésitez pas à m'écrire, réponse rapide garantie.",

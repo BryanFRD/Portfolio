@@ -9,7 +9,7 @@ const TEXT = {
     fr: 'Développeur Full-Stack & créateur de FerrLabs',
     en: 'Full-Stack Developer & creator of FerrLabs',
   },
-  kicker: { fr: '[init] - bonjour, je suis', en: '[init] - hi, i am' },
+  kicker: { fr: 'bonjour, je suis', en: 'hi, i am' },
   available: { fr: 'disponible', en: 'available' },
   seeProjects: { fr: 'voir les projets →', en: 'see the projects →' },
   contactMe: { fr: 'me contacter', en: 'contact me' },
