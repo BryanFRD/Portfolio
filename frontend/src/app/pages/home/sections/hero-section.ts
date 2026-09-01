@@ -10,7 +10,6 @@ const TEXT = {
     en: 'Full-Stack Developer & creator of FerrLabs',
   },
   kicker: { fr: 'bonjour, je suis', en: 'hi, i am' },
-  available: { fr: 'disponible', en: 'available' },
   seeProjects: { fr: 'voir les projets →', en: 'see the projects →' },
   contactMe: { fr: 'me contacter', en: 'contact me' },
 };
@@ -34,7 +33,6 @@ export class HeroSection {
   protected readonly line1 = signal(NAME);
   protected readonly line2 = signal(this.role);
   protected readonly phase = signal<TypingPhase>('done');
-  protected readonly currentYear = new Date().getFullYear();
 
   constructor() {
     afterNextRender(() => {

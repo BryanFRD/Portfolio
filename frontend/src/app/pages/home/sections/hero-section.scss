@@ -25,21 +25,6 @@
     radial-gradient(ellipse 75% 75% at 100% 0%, #000 0%, transparent 65%);
 }
 
-.status {
-  position: absolute;
-  top: 6rem;
-  right: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
-  font-size: 0.75rem;
-
-  .status-year {
-    color: var(--muted-foreground);
-  }
-}
-
 .hero-content {
   max-width: 64rem;
   position: relative;
