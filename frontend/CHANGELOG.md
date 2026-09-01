@@ -1,0 +1,22 @@
+# Changelog
+
+All notable changes to `frontend` will be documented here.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/).
+
+## [0.1.0] - 2026-09-01
+
+### Features
+
+- feat(frontend): clickable project rows and contact cards, scroll-based nav highlight
+- feat(frontend): keep scroll position when switching locale
+- feat: french and english locales with localized project data
+- feat(frontend): complete tech stack categories
+- feat(frontend): stronger hero grid parallax and Magellan public sector tag
+- feat(frontend): scroll parallax on hero and logo grids
+- feat(frontend): add Magellan alternance after MeTS takeover
+- feat: portfolio site with Angular SSR frontend, Rust API and FerrFlow release flow
+
+### Bug Fixes
+
+- fix(frontend): adjust stack lists
