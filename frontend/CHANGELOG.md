@@ -4,6 +4,12 @@ All notable changes to `frontend` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.1.2] - 2026-09-01
+
+### Bug Fixes
+
+- fix(frontend): harden runtime image for CVE scan
+
 ## [0.1.1] - 2026-09-01
 
 ### Bug Fixes
