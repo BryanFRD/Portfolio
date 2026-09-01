@@ -21,6 +21,9 @@
             <div class="row-body">
               <div class="row-title">
                 <h3>
+                  @if (project.logoUrl) {
+                    <img class="title-logo" [src]="project.logoUrl" alt="" />
+                  }
                   @if (project.repositoryUrl || project.liveUrl) {
                     <a
                       [href]="project.liveUrl ?? project.repositoryUrl"

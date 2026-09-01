@@ -59,6 +59,14 @@
     margin: 0;
     transition: color 0.2s ease;
 
+    .title-logo {
+      width: 1.5rem;
+      height: 1.5rem;
+      object-fit: contain;
+      margin-right: 0.5rem;
+      vertical-align: -0.125rem;
+    }
+
     a {
       text-decoration: none;
 
@@ -188,6 +196,10 @@
 @media (min-width: 64rem) {
   .row-visual {
     display: block;
+  }
+
+  .row-title h3 .title-logo {
+    display: none;
   }
 }
 

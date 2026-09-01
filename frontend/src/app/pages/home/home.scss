@@ -95,12 +95,12 @@
   }
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 48rem) {
   .navbar {
     padding: 1rem 1.25rem;
 
     ul {
-      gap: 1rem;
+      display: none;
     }
   }
 }
