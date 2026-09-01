@@ -1,0 +1,27 @@
+# Bryan Ferrando
+
+> Portfolio of Bryan Ferrando, full-stack developer: apprentice at Magellan (MeTS branch, public sector), Epitech student and creator of FerrLabs. The site is bilingual: French at /, English at /en.
+
+## Pages
+
+- [Accueil (français)](https://bryan-ferrando.fr/): hero, selected projects, tech stack, journey timeline and contact form
+- [Home (English)](https://bryan-ferrando.fr/en): same content in English
+
+## Projects
+
+- [FerrLabs](https://ferrlabs.com): the tool suite Bryan builds (FerrFlow, FerrVault, FerrTrack, FerrGrowth, FerrFleet, FerrLens, FerrGames)
+- [FerrFlow](https://ferrflow.com): universal semantic versioning for monorepos, written in Rust
+- [FerrGames](https://ferrgames.com): multiplayer browser party games, real-time Rust servers
+- [LFSX](https://lfsx.dev): fast, lightweight, secure Git LFS server in Rust
+- [IdleWarden](https://idlewarden.com): extensible automation platform for idle games on Windows
+- [Archego](https://archego.fr): complete client web platform with a Rust backend
+
+## Contact
+
+- [GitHub](https://github.com/BryanFRD)
+- [LinkedIn](https://www.linkedin.com/in/bryan-ferrando/)
+- Contact form on the site (POST /api/contact)
+
+## API
+
+- GET https://bryan-ferrando.fr/api/projects: the projects catalog as JSON, with French and English descriptions

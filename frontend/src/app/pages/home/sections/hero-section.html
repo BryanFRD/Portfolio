@@ -9,20 +9,26 @@
   <div class="hero-content">
     <p class="label">{{ t(text.kicker) }}</p>
     <h1 class="hero-name">
-      <span aria-hidden="true">{{ line1() }}</span>
+      <span class="sizer" aria-hidden="true">{{ name }}</span>
+      <span class="typed" aria-hidden="true"
+        >{{ line1()
+        }}@if (phase() === 'name') {
+          <span class="cursor blink">_</span>
+        }</span
+      >
       <span class="visually-hidden">{{ name }}</span>
-      @if (phase() === 'name') {
-        <span class="cursor blink" aria-hidden="true">_</span>
-      }
     </h1>
     <h2 class="hero-role">
-      <span aria-hidden="true">{{ line2() }}</span>
+      <span class="sizer" aria-hidden="true">{{ role }}_</span>
+      <span class="typed" aria-hidden="true"
+        >{{ line2()
+        }}@if (phase() === 'role') {
+          <span class="cursor blink">_</span>
+        } @else if (phase() === 'done') {
+          <span class="cursor">_</span>
+        }</span
+      >
       <span class="visually-hidden">{{ role }}</span>
-      @if (phase() === 'role') {
-        <span class="cursor blink" aria-hidden="true">_</span>
-      } @else if (phase() === 'done') {
-        <span class="cursor" aria-hidden="true">_</span>
-      }
     </h2>
     <div class="hero-actions">
       <button type="button" class="btn-primary" (click)="navigate.emit('projets')">

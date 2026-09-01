@@ -65,7 +65,6 @@
   line-height: 0.9;
   letter-spacing: -0.02em;
   margin: 0 0 0.5rem;
-  min-height: 0.9em;
 }
 
 .hero-role {
@@ -75,7 +74,22 @@
   line-height: 1.2;
   color: var(--muted-foreground);
   margin: 0 0 3rem;
-  min-height: 1.2em;
+}
+
+.hero-name,
+.hero-role {
+  position: relative;
+
+  .sizer {
+    visibility: hidden;
+  }
+
+  .typed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
 }
 
 .cursor {
