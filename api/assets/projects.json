@@ -6,8 +6,8 @@
     "status": { "fr": "en prod", "en": "in prod" },
     "year": 2026,
     "description": {
-      "fr": "La suite d'outils que je construis : FerrFlow (releases), FerrVault (secrets), FerrTrack (issues), FerrGrowth (sites marketing), FerrFleet (agents), FerrLens (outils web) et FerrGames. Le tout sur une plateforme commune (comptes, organisations, billing), un cluster Kubernetes en GitOps et une status page publique.",
-      "en": "The tool suite I am building: FerrFlow (releases), FerrVault (secrets), FerrTrack (issues), FerrGrowth (marketing sites), FerrFleet (agents), FerrLens (web tools) and FerrGames. All running on a shared platform (accounts, organisations, billing), a GitOps Kubernetes cluster and a public status page."
+      "fr": "La suite d'outils que je construis : FerrFlow (releases), FerrVault (secrets), FerrTrack (issues), FerrGrowth (sites marketing), FerrFleet (agents) et FerrLens (outils web). Le tout sur une plateforme commune (comptes, organisations, billing), un cluster Kubernetes en GitOps et une status page publique.",
+      "en": "The tool suite I am building: FerrFlow (releases), FerrVault (secrets), FerrTrack (issues), FerrGrowth (marketing sites), FerrFleet (agents) and FerrLens (web tools). All running on a shared platform (accounts, organisations, billing), a GitOps Kubernetes cluster and a public status page."
     },
     "technologies": ["Rust", "TypeScript", "Angular", "Kubernetes", "PostgreSQL"],
     "featured": true,

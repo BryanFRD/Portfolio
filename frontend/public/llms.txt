@@ -9,7 +9,7 @@
 
 ## Projects
 
-- [FerrLabs](https://ferrlabs.com): the tool suite Bryan builds (FerrFlow, FerrVault, FerrTrack, FerrGrowth, FerrFleet, FerrLens, FerrGames)
+- [FerrLabs](https://ferrlabs.com): the tool suite Bryan builds (FerrFlow, FerrVault, FerrTrack, FerrGrowth, FerrFleet, FerrLens)
 - [FerrFlow](https://ferrflow.com): universal semantic versioning for monorepos, written in Rust
 - [FerrGames](https://ferrgames.com): multiplayer browser party games, real-time Rust servers
 - [LFSX](https://lfsx.dev): fast, lightweight, secure Git LFS server in Rust
