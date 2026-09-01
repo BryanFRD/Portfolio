@@ -4,6 +4,12 @@ All notable changes to `frontend` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.2.2] - 2026-09-01
+
+### Bug Fixes
+
+- fix(frontend): mobile navbar keeps brand and locale, logo moves next to project title
+
 ## [0.2.1] - 2026-09-01
 
 ### Bug Fixes
