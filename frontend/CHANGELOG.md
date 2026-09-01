@@ -4,6 +4,12 @@ All notable changes to `frontend` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.2.0] - 2026-09-01
+
+### Features
+
+- feat(frontend): open graph preview image and drop open to work badge
+
 ## [0.1.4] - 2026-09-01
 
 ### Bug Fixes
