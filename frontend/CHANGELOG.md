@@ -4,6 +4,12 @@ All notable changes to `frontend` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.1.4] - 2026-09-01
+
+### Bug Fixes
+
+- fix: clickable project logos and FerrGames out of the FerrLabs card
+
 ## [0.1.3] - 2026-09-01
 
 ### Bug Fixes

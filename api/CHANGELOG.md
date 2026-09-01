@@ -4,6 +4,12 @@ All notable changes to `api` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.2.2] - 2026-09-01
+
+### Bug Fixes
+
+- fix: clickable project logos and FerrGames out of the FerrLabs card
+
 ## [0.2.1] - 2026-09-01
 
 ### Bug Fixes
