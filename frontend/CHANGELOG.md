@@ -4,6 +4,12 @@ All notable changes to `frontend` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [26.9.3] - 2026-09-02
+
+### Bug Fixes
+
+- perf: preload latin fonts, cache the projects endpoint, shrink png assets
+
 ## [0.2.3] - 2026-09-02
 
 ### Bug Fixes
