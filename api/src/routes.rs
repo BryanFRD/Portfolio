@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use axum::Router;
 use axum::extract::State;
-use axum::http::{HeaderMap, StatusCode};
+use axum::http::{HeaderMap, StatusCode, header};
 use axum::response::{IntoResponse, Json, Response};
 use axum::routing::{get, post};
 use axum_extra::extract::cookie::CookieJar;
@@ -16,8 +16,31 @@ use crate::model::{ContactRequest, Project};
 
 #[derive(Clone)]
 pub struct AppState {
-    pub projects: Arc<Vec<Project>>,
+    pub projects: Arc<ProjectsPayload>,
     pub mailer: Option<Arc<Mailer>>,
+}
+
+/// Le catalogue est embarque dans le binaire : il ne change qu'entre deux
+/// deploiements. On serialise une fois au demarrage et on derive un ETag du
+/// contenu, ce qui permet de repondre 304 sans re-serialiser a chaque appel.
+pub struct ProjectsPayload {
+    body: String,
+    etag: String,
+}
+
+impl ProjectsPayload {
+    pub fn new(projects: &[Project]) -> Self {
+        let body = serde_json::to_string(projects).expect("projects are serializable");
+        let mut hash: u64 = 0xcbf2_9ce4_8422_2325;
+        for byte in body.as_bytes() {
+            hash ^= u64::from(*byte);
+            hash = hash.wrapping_mul(0x0000_0100_0000_01b3);
+        }
+        Self {
+            etag: format!("\"{hash:016x}\""),
+            body,
+        }
+    }
 }
 
 pub fn router(state: AppState) -> Router {
@@ -40,8 +63,30 @@ async fn health() -> Json<serde_json::Value> {
     Json(json!({ "status": "ok" }))
 }
 
-async fn projects(State(state): State<AppState>) -> Json<Vec<Project>> {
-    Json(state.projects.as_ref().clone())
+const PROJECTS_CACHE_CONTROL: &str = "public, max-age=300, stale-while-revalidate=86400";
+
+async fn projects(State(state): State<AppState>, headers: HeaderMap) -> Response {
+    let payload = state.projects.as_ref();
+    let known = headers
+        .get(header::IF_NONE_MATCH)
+        .and_then(|value| value.to_str().ok())
+        .is_some_and(|value| value.split(',').any(|tag| tag.trim() == payload.etag));
+
+    let common = [
+        (header::ETAG, payload.etag.as_str()),
+        (header::CACHE_CONTROL, PROJECTS_CACHE_CONTROL),
+    ];
+
+    if known {
+        return (StatusCode::NOT_MODIFIED, common).into_response();
+    }
+
+    (
+        common,
+        [(header::CONTENT_TYPE, "application/json")],
+        payload.body.clone(),
+    )
+        .into_response()
 }
 
 async fn contact(
@@ -99,7 +144,7 @@ mod tests {
 
     fn test_router() -> Router {
         router(AppState {
-            projects: Arc::new(vec![Project {
+            projects: Arc::new(ProjectsPayload::new(&[Project {
                 slug: "demo".into(),
                 name: "Demo".into(),
                 category: LocalizedText {
@@ -121,7 +166,7 @@ mod tests {
                 live_url: None,
                 image_url: None,
                 logo_url: None,
-            }]),
+            }])),
             mailer: None,
         })
     }
@@ -168,9 +213,66 @@ mod tests {
             .unwrap();
 
         assert_eq!(response.status(), StatusCode::OK);
+        assert_eq!(
+            response
+                .headers()
+                .get(header::CACHE_CONTROL)
+                .and_then(|value| value.to_str().ok()),
+            Some(PROJECTS_CACHE_CONTROL)
+        );
+        assert!(response.headers().contains_key(header::ETAG));
         let json = body_json(response.into_response()).await;
         assert_eq!(json[0]["slug"], "demo");
         assert_eq!(json[0]["technologies"][0], "Rust");
+    }
+
+    #[tokio::test]
+    async fn projects_answers_304_when_the_etag_still_matches() {
+        let router = test_router();
+        let first = router
+            .clone()
+            .oneshot(Request::get("/api/projects").body(Body::empty()).unwrap())
+            .await
+            .unwrap();
+        let etag = first
+            .headers()
+            .get(header::ETAG)
+            .unwrap()
+            .to_str()
+            .unwrap()
+            .to_owned();
+
+        let cached = router
+            .clone()
+            .oneshot(
+                Request::get("/api/projects")
+                    .header(header::IF_NONE_MATCH, &etag)
+                    .body(Body::empty())
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        assert_eq!(cached.status(), StatusCode::NOT_MODIFIED);
+        assert!(
+            cached
+                .into_body()
+                .collect()
+                .await
+                .unwrap()
+                .to_bytes()
+                .is_empty()
+        );
+
+        let stale = router
+            .oneshot(
+                Request::get("/api/projects")
+                    .header(header::IF_NONE_MATCH, "\"outdated\"")
+                    .body(Body::empty())
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        assert_eq!(stale.status(), StatusCode::OK);
     }
 
     #[tokio::test]

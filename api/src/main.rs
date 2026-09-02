@@ -25,7 +25,7 @@ async fn main() {
     }
 
     let state = AppState {
-        projects: Arc::new(model::load_projects()),
+        projects: Arc::new(routes::ProjectsPayload::new(&model::load_projects())),
         mailer,
     };
 
