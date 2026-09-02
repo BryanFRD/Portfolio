@@ -1,5 +1,7 @@
 # Portfolio
 
+[![Sponsor](https://img.shields.io/badge/sponsor-EA4AAA?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/BryanFRD)
+
 [bryan-ferrando.fr](https://bryan-ferrando.fr) : site portfolio one-page, frontend Angular SSR et
 API Rust. Design sombre type terminal (JetBrains Mono + Fraunces, accent vert), issu d'une
 maquette Figma Make. Bilingue : français sur `/`, anglais sur `/en`.
