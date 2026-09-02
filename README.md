@@ -1,10 +1,12 @@
-# Portfolio
+<img src=".github/banner.png" alt="bryan.ferrando" width="100%">
 
+[![CI](https://github.com/BryanFRD/Portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/BryanFRD/Portfolio/actions/workflows/ci.yml)
+[![Site](https://img.shields.io/website?url=https%3A%2F%2Fbryan-ferrando.fr&label=bryan-ferrando.fr)](https://bryan-ferrando.fr)
 [![Sponsor](https://img.shields.io/badge/sponsor-EA4AAA?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/BryanFRD)
 
-[bryan-ferrando.fr](https://bryan-ferrando.fr) : site portfolio one-page, frontend Angular SSR et
-API Rust. Design sombre type terminal (JetBrains Mono + Fraunces, accent vert), issu d'une
-maquette Figma Make. Bilingue : français sur `/`, anglais sur `/en`.
+Site portfolio one-page servi sur [bryan-ferrando.fr](https://bryan-ferrando.fr) : frontend
+Angular SSR et API Rust. Design sombre type terminal (JetBrains Mono + Fraunces, accent vert),
+issu d'une maquette Figma Make. Bilingue : français sur `/`, anglais sur `/en`.
 
 ## Structure
 
@@ -58,8 +60,8 @@ répond `503`. Le `Reply-To` des mails est l'adresse saisie dans le formulaire.
 ## CI / Release
 
 - `ci.yml` : checks frontend (tests + build) et api (fmt, clippy, tests) puis release FerrFlow sur `main`
-- FerrFlow calcule les versions depuis les commits conventionnels et publie les tags
-  `frontend@vX.Y.Z` / `api@vX.Y.Z`
+- FerrFlow calcule les versions depuis les commits conventionnels (versionnement
+  `calver-short-seq`) et publie les tags `frontend@vX.Y.Z` / `api@vX.Y.Z`
 - `docker.yml` : à la publication d'une release, build de l'image du package concerné via la
   reusable workflow de l'org (buildah, scan Trivy bloquant sur CRITICAL/HIGH, signature cosign)
   et push vers `ghcr.io/bryanfrd/portfolio/{frontend,api}` (`<version>`, `<major.minor>`,
@@ -71,5 +73,5 @@ GitOps via FerrLabs/Homelab (`kubernetes/apps/base/portfolio`) : deux Deployment
 api), Flux image automation qui bump les tags d'images à chaque release, deux Ingress Traefik
 sur `bryan-ferrando.fr` (`/` vers le web, `/api` vers l'API) avec compression, rate limiting
 (30 req/s global, 5 req/s sur `/api`) et headers de sécurité (HSTS preload, nosniff, frameDeny).
-Secrets côté cluster : `ghcr-portfolio` (pull des images privées) et `portfolio-smtp` (les cinq
-variables SMTP ci-dessus).
+Les images sont publiques, donc aucun secret de registre : seul `portfolio-smtp` (les cinq
+variables SMTP ci-dessus) est nécessaire côté cluster.
