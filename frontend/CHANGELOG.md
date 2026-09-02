@@ -4,6 +4,12 @@ All notable changes to `frontend` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [26.9.5] - 2026-09-02
+
+### Bug Fixes
+
+- fix(api): never cache the csrf token, declare hreflang alternates in the sitemap
+
 ## [26.9.4] - 2026-09-02
 
 ### Bug Fixes

@@ -4,6 +4,12 @@ All notable changes to `api` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [26.9.3] - 2026-09-02
+
+### Bug Fixes
+
+- fix(api): never cache the csrf token, declare hreflang alternates in the sitemap
+
 ## [26.9.2] - 2026-09-02
 
 ### Bug Fixes
