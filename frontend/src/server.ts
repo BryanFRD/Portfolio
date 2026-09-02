@@ -11,6 +11,7 @@ const browserDistFolder = join(import.meta.dirname, '../browser');
 const apiUrl = process.env['API_URL'] ?? 'http://localhost:8080';
 
 const app = express();
+app.disable('x-powered-by');
 const angularApp = new AngularNodeAppEngine();
 
 app.use('/api', express.json(), async (req, res) => {
