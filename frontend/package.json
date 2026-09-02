@@ -1,6 +1,6 @@
 {
   "name": "portfolio-frontend",
-  "version": "0.2.3",
+  "version": "26.9.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
