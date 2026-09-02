@@ -10,7 +10,7 @@
     "serve:ssr:portfolio-frontend": "node dist/portfolio-frontend/server/server.mjs"
   },
   "private": true,
-  "packageManager": "pnpm@11.11.0",
+  "packageManager": "pnpm@11.25.0",
   "dependencies": {
     "@angular/common": "^22.0.0",
     "@angular/compiler": "^22.0.0",
