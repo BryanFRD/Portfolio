@@ -44,6 +44,7 @@ export class Seo {
 
   setLocale(lang: string, alternates: { lang: string; url: string }[]): void {
     this.document.documentElement.lang = lang;
+    this.meta.updateTag({ property: 'og:locale', content: lang === 'fr' ? 'fr_FR' : 'en_US' });
     for (const link of Array.from(
       this.document.head.querySelectorAll('link[rel="alternate"][hreflang]'),
     )) {
