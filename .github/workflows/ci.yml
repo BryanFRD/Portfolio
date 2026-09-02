@@ -24,7 +24,7 @@ jobs:
   check-frontend:
     name: Check (frontend)
     if: github.event_name != 'workflow_dispatch' || inputs.run_checks != false
-    runs-on: ferrlabs-k8s
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: frontend
@@ -45,7 +45,7 @@ jobs:
   check-api:
     name: Check (api)
     if: github.event_name != 'workflow_dispatch' || inputs.run_checks != false
-    runs-on: ferrlabs-k8s
+    runs-on: ubuntu-latest
     env:
       CARGO_INCREMENTAL: '0'
     steps:
@@ -73,7 +73,7 @@ jobs:
   release:
     name: Release with FerrFlow
     needs: [check-frontend, check-api]
-    runs-on: ferrlabs-k8s-light
+    runs-on: ubuntu-latest
     if: |
       always() &&
       (github.event_name != 'workflow_dispatch' || inputs.run_release != false) &&

@@ -55,15 +55,13 @@ répond `503`. Le `Reply-To` des mails est l'adresse saisie dans le formulaire.
 
 ## CI / Release
 
-- `ci.yml` : checks frontend (tests + build) et api (fmt, clippy, tests) sur les runners
-  `ferrlabs-k8s`, puis release FerrFlow sur `main`
+- `ci.yml` : checks frontend (tests + build) et api (fmt, clippy, tests) puis release FerrFlow sur `main`
 - FerrFlow calcule les versions depuis les commits conventionnels et publie les tags
   `frontend@vX.Y.Z` / `api@vX.Y.Z`
 - `docker.yml` : à la publication d'une release, build de l'image du package concerné via la
   reusable workflow de l'org (buildah, scan Trivy bloquant sur CRITICAL/HIGH, signature cosign)
-  et push vers `ghcr.io/ferrlabs/portfolio/{frontend,api}` (`<version>`, `<major.minor>`,
+  et push vers `ghcr.io/bryanfrd/portfolio/{frontend,api}` (`<version>`, `<major.minor>`,
   `latest`)
-- `renovate-rebase.yml` : cocher la case rebase d'une PR Renovate relance Renovate immédiatement
 
 ## Déploiement
 

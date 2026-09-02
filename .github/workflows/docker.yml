@@ -25,7 +25,7 @@ permissions:
 jobs:
   meta:
     name: Resolve build parameters
-    runs-on: ferrlabs-k8s-light
+    runs-on: ubuntu-latest
     outputs:
       package: ${{ steps.meta.outputs.package }}
       version: ${{ steps.meta.outputs.version }}
@@ -54,13 +54,13 @@ jobs:
     if: needs.meta.outputs.package == 'frontend'
     uses: FerrLabs/.github/.github/workflows/reusable-docker-build.yml@340c925168b2688fee08cff1a28bd3bf53754501 # main
     with:
-      runner: ferrlabs-k8s
-      image-name: ghcr.io/ferrlabs/portfolio/frontend
+      runner: ubuntu-latest
+      image-name: ghcr.io/bryanfrd/portfolio/frontend
       tag: ${{ needs.meta.outputs.version }}
       context: .
       dockerfile: frontend/Dockerfile
       platforms: linux/amd64
-      extra-tags: ghcr.io/ferrlabs/portfolio/frontend:${{ needs.meta.outputs.major_minor }}
+      extra-tags: ghcr.io/bryanfrd/portfolio/frontend:${{ needs.meta.outputs.major_minor }}
     secrets:
       packages-read: ${{ secrets.FERRFLOW_PACKAGES_READ || secrets.GITHUB_TOKEN }}
 
@@ -70,12 +70,12 @@ jobs:
     if: needs.meta.outputs.package == 'api'
     uses: FerrLabs/.github/.github/workflows/reusable-docker-build.yml@340c925168b2688fee08cff1a28bd3bf53754501 # main
     with:
-      runner: ferrlabs-k8s
-      image-name: ghcr.io/ferrlabs/portfolio/api
+      runner: ubuntu-latest
+      image-name: ghcr.io/bryanfrd/portfolio/api
       tag: ${{ needs.meta.outputs.version }}
       context: .
       dockerfile: api/Dockerfile
       platforms: linux/amd64
-      extra-tags: ghcr.io/ferrlabs/portfolio/api:${{ needs.meta.outputs.major_minor }}
+      extra-tags: ghcr.io/bryanfrd/portfolio/api:${{ needs.meta.outputs.major_minor }}
     secrets:
       packages-read: ${{ secrets.FERRFLOW_PACKAGES_READ || secrets.GITHUB_TOKEN }}
