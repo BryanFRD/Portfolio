@@ -1,7 +1,8 @@
-﻿# Portfolio
+# Portfolio
 
-Site portfolio one-page : frontend Angular avec SSR et API Rust. Design sombre type terminal
-(JetBrains Mono + Fraunces, accent vert), issu d'une maquette Figma Make.
+[bryan-ferrando.fr](https://bryan-ferrando.fr) : site portfolio one-page, frontend Angular SSR et
+API Rust. Design sombre type terminal (JetBrains Mono + Fraunces, accent vert), issu d'une
+maquette Figma Make. Bilingue : français sur `/`, anglais sur `/en`.
 
 ## Structure
 
@@ -17,20 +18,27 @@ cd frontend && pnpm start
 ```
 
 Le dev server Angular proxifie `/api` vers `http://localhost:8080` (`proxy.conf.json`).
-En production, le serveur SSR proxifie `/api` vers `API_URL` (défaut `http://localhost:8080`).
+Le serveur SSR proxifie aussi `/api` vers `API_URL` (défaut `http://localhost:8080`) pour ses
+propres fetchs ; en production, Traefik route `/api` directement vers l'API.
 
 ## Contenu
 
 Les projets affichés viennent de `api/assets/projects.json` (slug, catégorie, statut, année,
-description, stack, liens, image optionnelle). Le reste du contenu (hero, stack, contact) vit
-dans les composants de `frontend/src/app/pages/home/sections/`.
+description, stack, liens, logo, image optionnelle) ; `category`, `status` et `description` sont
+localisés `{fr, en}`. Le reste du contenu (hero, stack, timeline, contact) vit dans les
+dictionnaires des composants de `frontend/src/app/pages/home/sections/`. L'i18n est maison :
+`LocaleService` + objets `Localized{fr, en}` (`frontend/src/app/core/i18n.ts`), locale déduite de
+la route, switcher fr/en dans la navbar avec conservation du scroll.
 
 ## SEO
 
 - SSR runtime (RenderMode.Server) : la page arrive complète, projets inclus
-- Balises meta, Open Graph, canonical et JSON-LD gérés par `frontend/src/app/core/seo.ts`
-- `robots.txt` et `sitemap.xml` servis depuis `frontend/public/`
+- Balises meta, Open Graph (`og:image` 1200×630 : `frontend/public/og.png`), canonical, hreflang
+  fr/en et JSON-LD gérés par `frontend/src/app/core/seo.ts`
+- `robots.txt`, `sitemap.xml` et `llms.txt` servis depuis `frontend/public/`
 - Le domaine du site est centralisé dans `frontend/src/app/core/site.ts`
+- Lighthouse (mobile, 02/09/2026) : performance 98, accessibilité 100, best practices 100,
+  SEO 100
 
 ## API : configuration
 
@@ -42,10 +50,26 @@ dans les composants de `frontend/src/app/pages/home/sections/`.
 
 Le formulaire de contact est protégé par un token CSRF en double soumission : `GET /api/csrf`
 pose un cookie HttpOnly SameSite=Strict et renvoie le token, que `POST /api/contact` exige dans
-l'en-tête `X-Csrf-Token`. Sans configuration SMTP complète, l'endpoint répond `503`.
+l'en-tête `X-Csrf-Token`. Sans configuration SMTP complète (les cinq variables), l'endpoint
+répond `503`. Le `Reply-To` des mails est l'adresse saisie dans le formulaire.
 
 ## CI / Release
 
-- `ci.yml` : checks frontend (tests + build) et api (fmt, clippy, tests), puis release FerrFlow sur `main`
-- FerrFlow calcule les versions depuis les commits conventionnels et publie les tags `frontend@vX.Y.Z` / `api@vX.Y.Z`
-- `docker.yml` : à la publication d'une release, build et push de l'image du package concerné vers GHCR (`<version>`, `<major.minor>`, `latest`)
+- `ci.yml` : checks frontend (tests + build) et api (fmt, clippy, tests) sur les runners
+  `ferrlabs-k8s`, puis release FerrFlow sur `main`
+- FerrFlow calcule les versions depuis les commits conventionnels et publie les tags
+  `frontend@vX.Y.Z` / `api@vX.Y.Z`
+- `docker.yml` : à la publication d'une release, build de l'image du package concerné via la
+  reusable workflow de l'org (buildah, scan Trivy bloquant sur CRITICAL/HIGH, signature cosign)
+  et push vers `ghcr.io/ferrlabs/portfolio/{frontend,api}` (`<version>`, `<major.minor>`,
+  `latest`)
+- `renovate-rebase.yml` : cocher la case rebase d'une PR Renovate relance Renovate immédiatement
+
+## Déploiement
+
+GitOps via FerrLabs/Homelab (`kubernetes/apps/base/portfolio`) : deux Deployments (web SSR et
+api), Flux image automation qui bump les tags d'images à chaque release, deux Ingress Traefik
+sur `bryan-ferrando.fr` (`/` vers le web, `/api` vers l'API) avec compression, rate limiting
+(30 req/s global, 5 req/s sur `/api`) et headers de sécurité (HSTS preload, nosniff, frameDeny).
+Secrets côté cluster : `ghcr-portfolio` (pull des images privées) et `portfolio-smtp` (les cinq
+variables SMTP ci-dessus).
