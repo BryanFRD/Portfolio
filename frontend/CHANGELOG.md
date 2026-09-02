@@ -4,6 +4,12 @@ All notable changes to `frontend` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.2.3] - 2026-09-02
+
+### Bug Fixes
+
+- fix(frontend): advertise og:locale to social crawlers
+
 ## [0.2.2] - 2026-09-01
 
 ### Bug Fixes

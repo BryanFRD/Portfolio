@@ -4,6 +4,12 @@ All notable changes to `api` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.2.5] - 2026-09-02
+
+### Bug Fixes
+
+- fix(deps): update rust crate tower-http to 0.7 (#16)
+
 ## [0.2.4] - 2026-09-02
 
 ### Bug Fixes
