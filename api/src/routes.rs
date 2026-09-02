@@ -53,10 +53,17 @@ pub fn router(state: AppState) -> Router {
         .with_state(state)
 }
 
-async fn csrf_token(jar: CookieJar) -> (CookieJar, Json<serde_json::Value>) {
+/// Le jeton n'a de sens qu'appaire au cookie pose par la meme reponse : un
+/// cache intermediaire qui reservirait un ancien jeton ferait echouer l'envoi
+/// du formulaire en 403.
+async fn csrf_token(jar: CookieJar) -> impl IntoResponse {
     let token = csrf::generate_token();
     let jar = jar.add(csrf::build_cookie(token.clone()));
-    (jar, Json(json!({ "token": token })))
+    (
+        jar,
+        [(header::CACHE_CONTROL, "no-store")],
+        Json(json!({ "token": token })),
+    )
 }
 
 async fn health() -> Json<serde_json::Value> {
@@ -282,6 +289,22 @@ mod tests {
 
         assert_eq!(cookie, format!("csrf={token}"));
         assert_eq!(token.len(), 64);
+    }
+
+    #[tokio::test]
+    async fn csrf_token_is_never_cached() {
+        let response = test_router()
+            .oneshot(Request::get("/api/csrf").body(Body::empty()).unwrap())
+            .await
+            .unwrap();
+
+        assert_eq!(
+            response
+                .headers()
+                .get(header::CACHE_CONTROL)
+                .and_then(|value| value.to_str().ok()),
+            Some("no-store")
+        );
     }
 
     #[tokio::test]
