@@ -13,11 +13,13 @@ use validator::Validate;
 use crate::csrf;
 use crate::mailer::Mailer;
 use crate::model::{ContactRequest, Project};
+use crate::ratelimit::{self, RateLimiter};
 
 #[derive(Clone)]
 pub struct AppState {
     pub projects: Arc<ProjectsPayload>,
     pub mailer: Option<Arc<Mailer>>,
+    pub limiter: Arc<RateLimiter>,
 }
 
 /// Le catalogue est embarque dans le binaire : il ne change qu'entre deux
@@ -110,6 +112,18 @@ async fn contact(
             .into_response();
     }
 
+    // Après le CSRF, qui écarte les appels croisés, mais avant tout envoi :
+    // l'accusé de réception part vers une adresse fournie par l'appelant.
+    if let Some(ip) = ratelimit::client_ip(&headers)
+        && !state.limiter.allow(&ip)
+    {
+        return (
+            StatusCode::TOO_MANY_REQUESTS,
+            Json(json!({ "error": "too many messages, try again later" })),
+        )
+            .into_response();
+    }
+
     if let Err(errors) = request.validate() {
         return (
             StatusCode::UNPROCESSABLE_ENTITY,
@@ -127,7 +141,14 @@ async fn contact(
     };
 
     match mailer.send_contact(&request).await {
-        Ok(()) => StatusCode::ACCEPTED.into_response(),
+        Ok(()) => {
+            // L'accusé est un confort : son échec ne doit pas faire croire au
+            // visiteur que son message s'est perdu, il est bien arrivé.
+            if let Err(error) = mailer.send_acknowledgement(&request).await {
+                tracing::warn!(?error, "failed to send acknowledgement to the sender");
+            }
+            StatusCode::ACCEPTED.into_response()
+        }
         Err(error) => {
             tracing::error!(?error, "failed to send contact email");
             (
@@ -175,6 +196,7 @@ mod tests {
                 logo_url: None,
             }])),
             mailer: None,
+            limiter: Arc::new(RateLimiter::new()),
         })
     }
 
@@ -210,6 +232,75 @@ mod tests {
             .header("x-csrf-token", token)
             .body(Body::from(payload.to_string()))
             .unwrap()
+    }
+
+    fn contact_request_from(
+        ip: &str,
+        cookie: &str,
+        token: &str,
+        payload: &serde_json::Value,
+    ) -> Request<Body> {
+        Request::post("/api/contact")
+            .header(header::CONTENT_TYPE, "application/json")
+            .header(header::COOKIE, cookie)
+            .header("x-csrf-token", token)
+            .header("x-real-ip", ip)
+            .body(Body::from(payload.to_string()))
+            .unwrap()
+    }
+
+    /// Le quota précède l'envoi : sans mailer les appels autorisés répondent
+    /// 503, ce qui suffit à distinguer le refus pour quota du reste.
+    #[tokio::test]
+    async fn contact_refuses_once_the_ip_quota_is_spent() {
+        let router = test_router();
+        let payload = json!({
+            "name": "Jane Doe",
+            "email": "jane@example.com",
+            "message": "Bonjour, je souhaite discuter d'un projet."
+        });
+
+        for _ in 0..3 {
+            let (cookie, token) = csrf_pair(&router).await;
+            let response = router
+                .clone()
+                .oneshot(contact_request_from(
+                    "203.0.113.9",
+                    &cookie,
+                    &token,
+                    &payload,
+                ))
+                .await
+                .unwrap();
+            assert_eq!(response.status(), StatusCode::SERVICE_UNAVAILABLE);
+        }
+
+        let (cookie, token) = csrf_pair(&router).await;
+        let response = router
+            .clone()
+            .oneshot(contact_request_from(
+                "203.0.113.9",
+                &cookie,
+                &token,
+                &payload,
+            ))
+            .await
+            .unwrap();
+        assert_eq!(response.status(), StatusCode::TOO_MANY_REQUESTS);
+
+        // Une autre adresse conserve son propre quota.
+        let (cookie, token) = csrf_pair(&router).await;
+        let response = router
+            .clone()
+            .oneshot(contact_request_from(
+                "203.0.113.10",
+                &cookie,
+                &token,
+                &payload,
+            ))
+            .await
+            .unwrap();
+        assert_eq!(response.status(), StatusCode::SERVICE_UNAVAILABLE);
     }
 
     #[tokio::test]

@@ -1,6 +1,7 @@
 mod csrf;
 mod mailer;
 mod model;
+mod ratelimit;
 mod routes;
 
 use std::net::SocketAddr;
@@ -9,6 +10,7 @@ use std::sync::Arc;
 use tracing_subscriber::EnvFilter;
 
 use crate::mailer::Mailer;
+use crate::ratelimit::RateLimiter;
 use crate::routes::AppState;
 
 #[tokio::main]
@@ -27,6 +29,7 @@ async fn main() {
     let state = AppState {
         projects: Arc::new(routes::ProjectsPayload::new(&model::load_projects())),
         mailer,
+        limiter: Arc::new(RateLimiter::new()),
     };
 
     let port = std::env::var("PORT")

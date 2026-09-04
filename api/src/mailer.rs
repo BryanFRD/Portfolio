@@ -35,10 +35,11 @@ impl std::error::Error for MailError {
     }
 }
 
-/// Signale aux destinataires que le message est généré par un formulaire et
-/// non écrit à la main, ce qui évite les réponses automatiques en boucle.
+/// Signale aux destinataires que le message est produit par un automate et non
+/// écrit à la main, ce qui évite les réponses automatiques en boucle. RFC 3834 :
+/// `auto-generated` pour la notification, `auto-replied` pour l'accusé.
 #[derive(Clone)]
-struct AutoSubmitted;
+struct AutoSubmitted(&'static str);
 
 impl Header for AutoSubmitted {
     fn name() -> HeaderName {
@@ -46,11 +47,11 @@ impl Header for AutoSubmitted {
     }
 
     fn parse(_value: &str) -> Result<Self, Box<dyn std::error::Error + Send + Sync>> {
-        Ok(Self)
+        Ok(Self("auto-generated"))
     }
 
     fn display(&self) -> HeaderValue {
-        HeaderValue::new(Self::name(), "auto-generated".to_owned())
+        HeaderValue::new(Self::name(), self.0.to_owned())
     }
 }
 
@@ -109,11 +110,40 @@ impl Mailer {
             .reply_to(reply_to)
             .to(self.to.clone())
             .message_id(Some(self.message_id()))
-            .header(AutoSubmitted)
+            .header(AutoSubmitted("auto-generated"))
             .subject(format!("[Portfolio] Message de {}", request.name))
             .body(format!(
                 "De : {} <{}>\n\n{}",
                 request.name, request.email, request.message
+            ))
+            .map_err(MailError::Build)?;
+
+        self.transport.send(email).await.map_err(MailError::Send)?;
+        Ok(())
+    }
+
+    /// Accusé de réception envoyé au visiteur.
+    ///
+    /// Le corps ne reprend délibérément pas son message : l'adresse de
+    /// destination est fournie par un inconnu, donc tout contenu recopié ici
+    /// permettrait de faire transiter un texte arbitraire vers une adresse
+    /// arbitraire, signé par le domaine. L'accusé est identique pour tous.
+    pub async fn send_acknowledgement(&self, request: &ContactRequest) -> Result<(), MailError> {
+        let to = Mailbox::new(
+            Some(request.name.clone()),
+            request.email.parse().map_err(MailError::InvalidAddress)?,
+        );
+        let email = Message::builder()
+            .from(self.from.clone())
+            .to(to)
+            .message_id(Some(self.message_id()))
+            .header(AutoSubmitted("auto-replied"))
+            .subject("Votre message a bien été reçu")
+            .body(format!(
+                "Bonjour {},\n\nMerci pour votre message, je l'ai bien reçu et je vous \
+                 réponds dès que possible.\n\nInutile de répondre à cet email, il est \
+                 envoyé automatiquement.\n\nBryan Ferrando\nhttps://bryan-ferrando.fr\n",
+                request.name
             ))
             .map_err(MailError::Build)?;
 
