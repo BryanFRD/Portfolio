@@ -4,6 +4,12 @@ All notable changes to `frontend` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [26.9.6] - 2026-09-04
+
+### Features
+
+- feat(api): add RoxyCloud to the projects catalog
+
 ## [26.9.5] - 2026-09-02
 
 ### Bug Fixes
