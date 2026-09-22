@@ -129,6 +129,33 @@
     "logoUrl": "/logos/roxycloud.svg"
   },
   {
+    "slug": "awesome-alternatives",
+    "name": "awesome-alternatives",
+    "category": {
+      "fr": "Catalogue",
+      "en": "Catalog"
+    },
+    "status": {
+      "fr": "en prod",
+      "en": "in prod"
+    },
+    "year": 2026,
+    "description": {
+      "fr": "Catalogue de 153 outils de dev qui dit, pour chacun, ce qu'il remplace et à quel point. Une fiche ne contient que ce qu'un contributeur écrit : les étoiles, la licence, la version et les dernières releases sont relues sur l'API GitHub chaque nuit, jamais saisies à la main. Recherche en langage naturel servie par un moteur Rust avec un petit modèle d'embeddings.",
+      "en": "A catalog of 153 developer tools, each listed with what it replaces and how closely. An entry only holds what a contributor writes: stars, licence, version and recent releases are re-read from the GitHub API every night, never typed by hand. Natural language search served by a Rust engine with a small embedding model."
+    },
+    "technologies": [
+      "Astro",
+      "TypeScript",
+      "Rust",
+      "GitHub Actions"
+    ],
+    "featured": true,
+    "repositoryUrl": "https://github.com/awesome-alternatives/awesome-alternatives",
+    "liveUrl": "https://awesome-alternatives.com",
+    "logoUrl": "/logos/awesome-alternatives.svg"
+  },
+  {
     "slug": "idlewarden",
     "name": "IdleWarden",
     "category": {
