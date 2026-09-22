@@ -4,6 +4,12 @@ All notable changes to `api` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [26.9.6] - 2026-09-22
+
+### Features
+
+- feat(api): add awesome-alternatives to the projects catalog
+
 ## [26.9.5] - 2026-09-04
 
 ### Bug Fixes

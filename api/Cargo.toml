@@ -1,6 +1,6 @@
 [package]
 name = "portfolio-api"
-version = "26.9.5"
+version = "26.9.6"
 edition = "2024"
 
 [dependencies]
