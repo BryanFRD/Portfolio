@@ -4,6 +4,12 @@ All notable changes to `frontend` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [26.10.1] - 2026-10-10
+
+### Features
+
+- feat(api): add Collectle to the projects catalog
+
 ## [26.9.8] - 2026-09-24
 
 ### Bug Fixes
