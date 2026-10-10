@@ -156,6 +156,30 @@
     "logoUrl": "/logos/awesome-alternatives.svg"
   },
   {
+    "slug": "collectle",
+    "name": "Collectle",
+    "category": {
+      "fr": "Jeu de cartes",
+      "en": "Card game"
+    },
+    "status": {
+      "fr": "en prod",
+      "en": "in prod"
+    },
+    "year": 2026,
+    "description": {
+      "fr": "Un jeu de cartes à collectionner où chaque carte raconte une histoire vraie : découvertes, personnages et merveilles qui ont façonné le monde. 1437 cartes réparties en quatre raretés, ouverture de packs, marché d'échange, succès et classements.",
+      "en": "A collectible card game where every card tells a true story: the discoveries, people and wonders that shaped our world. 1437 cards across four rarities, pack opening, a trading market, achievements and leaderboards."
+    },
+    "technologies": [
+      "Angular",
+      "TypeScript"
+    ],
+    "featured": true,
+    "liveUrl": "https://collectle.com",
+    "logoUrl": "/logos/collectle.svg"
+  },
+  {
     "slug": "idlewarden",
     "name": "IdleWarden",
     "category": {
