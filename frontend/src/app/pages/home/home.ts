@@ -16,13 +16,18 @@ const NAV_LINKS = [
 ];
 
 const DESCRIPTION = {
-  fr: 'Bryan Ferrando, développeur full-stack : alternant chez Magellan, étudiant à Epitech et créateur de FerrLabs. Projets, stack et contact.',
-  en: 'Bryan Ferrando, full-stack developer: apprentice at Magellan, Epitech student and creator of FerrLabs. Projects, stack and contact.',
+  fr: 'Portfolio de Bryan Ferrando, développeur full-stack en CDI chez Magellan, étudiant à Epitech et créateur de FerrLabs. Projets Rust et Angular, stack, contact.',
+  en: 'Portfolio of Bryan Ferrando, full-stack developer in a permanent role at Magellan, Epitech student and FerrLabs creator. Rust and Angular projects, stack, contact.',
 };
 
 const FULL_TITLE = {
-  fr: 'Bryan Ferrando | Développeur full-stack',
-  en: 'Bryan Ferrando | Full-Stack Developer',
+  fr: 'Bryan Ferrando | Portfolio développeur full-stack',
+  en: 'Bryan Ferrando | Full-Stack Developer Portfolio',
+};
+
+const FOOTER_TAGLINE = {
+  fr: 'portfolio développeur full-stack',
+  en: 'full-stack developer portfolio',
 };
 
 const JOB_TITLE = {
@@ -51,6 +56,7 @@ export class Home implements OnDestroy {
   protected readonly t = this.localeService.t;
   protected readonly locale = this.localeService.locale;
   protected readonly navLinks = NAV_LINKS;
+  protected readonly footerTagline = FOOTER_TAGLINE;
   protected readonly activeSection = signal('hero');
   protected readonly currentYear = new Date().getFullYear();
 

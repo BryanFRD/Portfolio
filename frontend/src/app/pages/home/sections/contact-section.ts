@@ -43,7 +43,7 @@ const TEXT = {
 const STATUS_ROWS = [
   {
     label: { fr: 'actuellement', en: 'currently' },
-    value: { fr: 'alternant @ Magellan', en: 'apprentice @ Magellan' },
+    value: { fr: 'CDI @ Magellan', en: 'permanent @ Magellan' },
     highlight: false,
   },
   {

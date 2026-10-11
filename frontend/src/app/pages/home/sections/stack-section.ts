@@ -79,8 +79,8 @@ const TIMELINE = [
   {
     year: '2026',
     title: {
-      fr: 'Alternance chez Magellan, rachat de la branche MeTS',
-      en: 'Apprenticeship at Magellan, MeTS branch takeover',
+      fr: 'CDI chez Magellan, rachat de la branche MeTS',
+      en: 'Permanent role at Magellan, MeTS branch takeover',
     },
     tags: {
       fr: ['Full-stack', 'MeTS', 'Secteur public'],
