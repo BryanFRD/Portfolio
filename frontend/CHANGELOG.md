@@ -4,6 +4,12 @@ All notable changes to `frontend` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [26.10.2] - 2026-10-11
+
+### Features
+
+- feat(frontend): target portfolio in titles and descriptions, Magellan now CDI
+
 ## [26.10.1] - 2026-10-10
 
 ### Features
