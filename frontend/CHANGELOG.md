@@ -4,6 +4,14 @@ All notable changes to `frontend` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [26.10.3] - 2026-10-28
+
+### Features
+
+- feat(frontend): show job title in the Worldline timeline entry
+- feat(frontend): show job title instead of contract type in the Magellan timeline entry
+- feat(frontend): present role as Software Engineer at Magellan, drop student status
+
 ## [26.10.2] - 2026-10-11
 
 ### Features
