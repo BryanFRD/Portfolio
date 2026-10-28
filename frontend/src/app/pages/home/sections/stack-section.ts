@@ -79,8 +79,8 @@ const TIMELINE = [
   {
     year: '2026',
     title: {
-      fr: 'Ingénieur études et développement en CDI chez Magellan',
-      en: 'Software Engineer at Magellan, permanent role',
+      fr: 'Ingénieur études et développement chez Magellan, rachat de la branche MeTS',
+      en: 'Software Engineer at Magellan, MeTS branch takeover',
     },
     tags: {
       fr: ['Full-stack', 'MeTS', 'Secteur public'],
