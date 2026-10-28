@@ -1,6 +1,6 @@
 # Bryan Ferrando
 
-> Portfolio of Bryan Ferrando, full-stack developer: apprentice at Magellan (MeTS branch, public sector), Epitech student and creator of FerrLabs. The site is bilingual: French at /, English at /en.
+> Portfolio of Bryan Ferrando, Software Engineer at Magellan (MeTS branch, public sector) and creator of FerrLabs. The site is bilingual: French at /, English at /en.
 
 ## Pages
 

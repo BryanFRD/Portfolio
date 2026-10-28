@@ -21,7 +21,7 @@ export class Seo {
   setPage(seo: PageSeo): void {
     const fullTitle =
       seo.fullTitle ??
-      (seo.path === '/' ? `${SITE_NAME} | Développeur full-stack` : `${seo.title} | ${SITE_NAME}`);
+      (seo.path === '/' ? `${SITE_NAME} | Ingénieur études et développement` : `${seo.title} | ${SITE_NAME}`);
     const description = seo.description ?? DEFAULT_DESCRIPTION;
     const url = `${SITE_URL}${seo.path}`;
 

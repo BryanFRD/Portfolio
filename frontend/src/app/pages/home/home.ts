@@ -16,23 +16,23 @@ const NAV_LINKS = [
 ];
 
 const DESCRIPTION = {
-  fr: 'Portfolio de Bryan Ferrando, développeur full-stack en CDI chez Magellan, étudiant à Epitech et créateur de FerrLabs. Projets Rust et Angular, stack, contact.',
-  en: 'Portfolio of Bryan Ferrando, full-stack developer in a permanent role at Magellan, Epitech student and FerrLabs creator. Rust and Angular projects, stack, contact.',
+  fr: 'Portfolio de Bryan Ferrando, ingénieur études et développement chez Magellan et créateur de FerrLabs. Projets Rust et Angular, stack, contact.',
+  en: 'Portfolio of Bryan Ferrando, Software Engineer at Magellan and creator of FerrLabs. Rust and Angular projects, stack, contact.',
 };
 
 const FULL_TITLE = {
-  fr: 'Bryan Ferrando | Portfolio développeur full-stack',
-  en: 'Bryan Ferrando | Full-Stack Developer Portfolio',
+  fr: 'Bryan Ferrando | Portfolio ingénieur études et développement',
+  en: 'Bryan Ferrando | Software Engineer Portfolio',
 };
 
 const FOOTER_TAGLINE = {
-  fr: 'portfolio développeur full-stack',
-  en: 'full-stack developer portfolio',
+  fr: 'portfolio ingénieur études et développement',
+  en: 'software engineer portfolio',
 };
 
 const JOB_TITLE = {
-  fr: 'Développeur full-stack',
-  en: 'Full-stack developer',
+  fr: 'Ingénieur études et développement',
+  en: 'Software Engineer',
 };
 
 @Component({

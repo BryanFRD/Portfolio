@@ -6,8 +6,8 @@ const NAME = 'Bryan Ferrando';
 
 const TEXT = {
   role: {
-    fr: 'Développeur Full-Stack & créateur de FerrLabs',
-    en: 'Full-Stack Developer & creator of FerrLabs',
+    fr: 'Ingénieur études et développement & créateur de FerrLabs',
+    en: 'Software Engineer & creator of FerrLabs',
   },
   kicker: { fr: 'bonjour, je suis', en: 'hi, i am' },
   seeProjects: { fr: 'voir les projets →', en: 'see the projects →' },

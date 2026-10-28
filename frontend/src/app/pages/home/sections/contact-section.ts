@@ -43,12 +43,10 @@ const TEXT = {
 const STATUS_ROWS = [
   {
     label: { fr: 'actuellement', en: 'currently' },
-    value: { fr: 'CDI @ Magellan', en: 'permanent @ Magellan' },
-    highlight: false,
-  },
-  {
-    label: { fr: 'études', en: 'studies' },
-    value: { fr: 'Epitech, MSc', en: 'Epitech, MSc' },
+    value: {
+      fr: 'Ingénieur études et développement @ Magellan',
+      en: 'Software Engineer @ Magellan',
+    },
     highlight: false,
   },
   {

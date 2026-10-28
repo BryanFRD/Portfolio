@@ -30,7 +30,7 @@ describe('Seo', () => {
   it('uses the site headline instead of a suffixed title on the home page', () => {
     service.setPage({ title: 'Accueil', path: '/' });
 
-    expect(title.getTitle()).toBe('Bryan Ferrando | Développeur full-stack');
+    expect(title.getTitle()).toBe('Bryan Ferrando | Ingénieur études et développement');
   });
 
   it('creates then updates a single canonical link', () => {
