@@ -62,7 +62,10 @@ const TIMELINE = [
   },
   {
     year: '2024',
-    title: { fr: 'Alternance chez Worldline', en: 'Apprenticeship at Worldline' },
+    title: {
+      fr: 'Développeur full-stack en alternance chez Worldline',
+      en: 'Full-stack developer apprentice at Worldline',
+    },
     tags: {
       fr: ['Full-stack', 'MeTS', 'Secteur public'],
       en: ['Full-stack', 'MeTS', 'Public sector'],
