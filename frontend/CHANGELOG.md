@@ -4,6 +4,12 @@ All notable changes to `frontend` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [26.11.1] - 2026-11-03
+
+### Bug Fixes
+
+- fix(deps): bump angular, express and rustls to patched versions (#23)
+
 ## [26.10.3] - 2026-10-28
 
 ### Features
