@@ -4,6 +4,12 @@ All notable changes to `api` will be documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [26.11.2] - 2026-11-10
+
+### Features
+
+- feat(api): remove Collectle from the projects catalog (#24)
+
 ## [26.11.1] - 2026-11-03
 
 ### Bug Fixes
