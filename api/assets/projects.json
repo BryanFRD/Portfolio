@@ -156,32 +156,6 @@
     "logoUrl": "/logos/awesome-alternatives.svg"
   },
   {
-    "slug": "idlewarden",
-    "name": "IdleWarden",
-    "category": {
-      "fr": "Application desktop",
-      "en": "Desktop app"
-    },
-    "status": {
-      "fr": "open source",
-      "en": "open source"
-    },
-    "year": 2026,
-    "description": {
-      "fr": "Plateforme d'automatisation extensible pour les jeux idle et incrémentaux solo sur Windows. Cœur en Rust, plugins communautaires via un registre public, mises à jour signées, et aucun contournement d'anti-cheat.",
-      "en": "An extensible automation platform for single-player idle and incremental games on Windows. Rust core, community plugins through a public registry, signed updates, and no anti-cheat circumvention."
-    },
-    "technologies": [
-      "Rust",
-      "Windows",
-      "Plugins"
-    ],
-    "featured": true,
-    "repositoryUrl": "https://github.com/IdleWarden/idlewarden",
-    "liveUrl": "https://idlewarden.com",
-    "logoUrl": "/logos/idlewarden.svg"
-  },
-  {
     "slug": "archego",
     "name": "Archego",
     "category": {

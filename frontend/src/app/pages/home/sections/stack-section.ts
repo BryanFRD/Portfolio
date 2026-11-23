@@ -74,8 +74,8 @@ const TIMELINE = [
   {
     year: '2026',
     title: {
-      fr: 'Création de FerrLabs : FerrFlow, LFSX, IdleWarden',
-      en: 'Founded FerrLabs: FerrFlow, LFSX, IdleWarden',
+      fr: 'Création de FerrLabs : FerrFlow, LFSX',
+      en: 'Founded FerrLabs: FerrFlow, LFSX',
     },
     tags: { fr: ['Rust', 'Kubernetes', 'Angular'], en: ['Rust', 'Kubernetes', 'Angular'] },
   },

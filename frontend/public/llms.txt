@@ -13,7 +13,6 @@
 - [FerrFlow](https://ferrflow.com): universal semantic versioning for monorepos, written in Rust
 - [FerrGames](https://ferrgames.com): multiplayer browser party games, real-time Rust servers
 - [LFSX](https://lfsx.dev): fast, lightweight, secure Git LFS server in Rust
-- [IdleWarden](https://idlewarden.com): extensible automation platform for idle games on Windows
 - [Archego](https://archego.fr): complete client web platform with a Rust backend
 
 ## Contact
